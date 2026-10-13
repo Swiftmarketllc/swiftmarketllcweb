@@ -27,6 +27,9 @@ const files = new Set([
   "components/preview/launch-copy-drafts.ts", "components/preview/enquiry-form-demo.tsx",
   "components/preview/launch-pages-preview.tsx",
   "components/forms/enquiry-form.tsx", "lib/enquiry/form-contract.ts",
+  "components/pages/homepage.tsx", "components/preview/homepage-review.tsx",
+  "components/sections/home-hero.tsx", "components/sections/ribbon-artwork.tsx",
+  "components/sections/home-capabilities.tsx", "components/sections/home-story.tsx",
   ...["services", "industries", "packages", "about", "contact", "privacy"].map(name => `app/${name}/page.tsx`),
 ]);
 const cache = new Map();
@@ -402,4 +405,89 @@ test("Phase 2 enquiry form uses labelled provisional fields and disables public 
   assert.match(honeypot, /tabindex="-1"/);
   assert.match(markup, /Submission unavailable/);
   assert.doesNotMatch(markup, /action=|info@swiftmarketllc|Your enquiry was accepted/);
+});
+
+test("premium homepage public entry fails closed and never renders provisional review copy", () => {
+  const { Homepage } = load("components/pages/homepage.tsx");
+  const { HomepageReview } = load("components/preview/homepage-review.tsx");
+  assert.equal(render(Homepage, {}), "");
+  assert.equal(render(HomepageReview, {}), "");
+  testEnvironment.env.NODE_ENV = "development";
+  try {
+    const markup = render(HomepageReview, {});
+    assert.match(markup, /DRAFT \/ TBF/);
+    assert.match(markup, /provisional/);
+    assert.equal((markup.match(/<main\b/g) ?? []).length, 1);
+    assert.equal((markup.match(/<h1\b/g) ?? []).length, 1);
+    assert.equal((markup.match(/<header\b/g) ?? []).length, 1);
+    assert.equal((markup.match(/<footer\b/g) ?? []).length, 1);
+    assert.equal((markup.match(/<article\b/g) ?? []).length, 3);
+    assert.match(markup, /id="main-content" tabindex="-1"/);
+    assert.doesNotMatch(markup, /<a\b|<button\b|<form\b|<canvas\b|<img\b/);
+    const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+    assert.equal(new Set(ids).size, ids.length);
+    for (const [, label] of markup.matchAll(/aria-labelledby="([^"]+)"/g)) assert.ok(ids.includes(label));
+    assert.match(markup, /block warm/); assert.match(markup, /block cool/);
+  } finally { testEnvironment.env.NODE_ENV = "production"; }
+  assert.doesNotMatch(render(load("app/page.tsx").default, {}), /Make room|what&#x27;s next/);
+});
+
+test("original ribbon is decorative, self-contained and uses unique gradient IDs", () => {
+  const { RibbonArtwork } = load("components/sections/ribbon-artwork.tsx");
+  const markup = renderToStaticMarkup(createElement("div", null, createElement(RibbonArtwork), createElement(RibbonArtwork)));
+  assert.equal((markup.match(/aria-hidden="true"/g) ?? []).length, 2);
+  assert.equal((markup.match(/focusable="false"/g) ?? []).length, 2);
+  const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  assert.equal(new Set(ids).size, ids.length);
+  for (const [, id] of markup.matchAll(/url\(#([^)]*)\)/g)) assert.ok(ids.includes(id));
+  assert.doesNotMatch(markup, /https?:|<image\b|<text\b|<script\b/);
+});
+
+test("homepage compositions omit empty cards and publication-ineligible CTA destinations", () => {
+  const { HomeCapabilities } = load("components/sections/home-capabilities.tsx");
+  assert.equal(render(HomeCapabilities, { items: [] }), "");
+  const markup = render(load("components/pages/homepage.tsx").HomepageComposition, {
+    heading: "SYNTHETIC TEST ONLY", summary: "SYNTHETIC TEST ONLY", capabilities: [], stories: [],
+    cta: { kind: "navigation", intent: "explore", label: "SYNTHETIC ONLY", destination: { routeId: "route:contact" } },
+  });
+  assert.doesNotMatch(markup, /<a\b/);
+  assert.equal((markup.match(/<h1\b/g) ?? []).length, 1);
+});
+
+test("homepage layout is token-based, wrap-safe and progressively enhanced without motion dependence", () => {
+  const css = ["home-hero", "home-capabilities", "home-story"].map(name => readFileSync(resolve(root, `components/sections/${name}.module.css`), "utf8")).join("\n");
+  assert.match(css, /repeat\(12, minmax\(0, 1fr\)\)/);
+  assert.match(css, /prefers-reduced-motion/); assert.match(css, /forced-colors/);
+  assert.match(css, /hover: hover/); assert.match(css, /pointer: fine/);
+  assert.match(css, /:focus-within/); assert.match(css, /:active/);
+  assert.match(css, /var\(--type-display\)/); assert.match(css, /var\(--weight-heading\)/);
+  assert.doesNotMatch(css, /text-stroke|text-fill-color:\s*transparent|opacity:\s*0[;}]|100vh|position:\s*fixed/);
+});
+
+test("redesigned hero preserves headline text with intentional lines and one accessible heading", () => {
+  const markup = render(load("components/sections/home-hero.tsx").HomeHero, {
+    heading: "SYNTHETIC FIRST\nSYNTHETIC SECOND", summary: "SYNTHETIC REVIEW ONLY",
+  });
+  assert.equal((markup.match(/<h1\b/g) ?? []).length, 1);
+  assert.match(markup, /<span class="line">SYNTHETIC FIRST<\/span><span class="line"> SYNTHETIC SECOND<\/span>/);
+  assert.doesNotMatch(markup, /<button|<canvas|<iframe/);
+});
+
+test("bento capabilities vary visual treatment without inventing interaction or losing supplied copy", () => {
+  const items = ["one", "two", "three"].map(id => ({ id, heading: `SYNTHETIC ${id}`, body: `SYNTHETIC BODY ${id}` }));
+  const markup = render(load("components/sections/home-capabilities.tsx").HomeCapabilities, { items });
+  for (const variant of ["orbit", "paper", "system"]) assert.match(markup, new RegExp(`data-visual="${variant}"`));
+  for (const item of items) assert.ok(markup.includes(item.heading) && markup.includes(item.body));
+  assert.doesNotMatch(markup, /tabindex=|onclick=|role="button"/);
+});
+
+test("sticky scenes retain static content and restrict motion to optional decorative transforms", () => {
+  const css = readFileSync(resolve(root, "components/sections/home-story.module.css"), "utf8");
+  assert.match(css, /position: sticky/);
+  assert.match(css, /min-height: 44rem/);
+  assert.match(css, /prefers-reduced-motion: no-preference/);
+  assert.match(css, /@supports \(animation-timeline: view\(\)\)/);
+  assert.match(css, /\.scene:focus-within\s*\{ position: relative/);
+  assert.match(css, /prefers-reduced-motion: reduce[^]*?\.scene\s*\{ position: relative/);
+  assert.doesNotMatch(css, /opacity:\s*0|visibility:\s*hidden|animation:[^;]*infinite/);
 });

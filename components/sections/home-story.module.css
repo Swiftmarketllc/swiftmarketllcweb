@@ -1,0 +1,30 @@
+﻿.sequence { padding-block: var(--section-space); display: grid; gap: var(--space-12); }
+.scene { min-inline-size: 0; background: var(--background); }
+.scene :global(.section) { padding-block: var(--space-6); scroll-margin-block-start: var(--space-12); }
+.scene :global(.page-container) :global(.reading-container):has(> .story) { inline-size: 100%; }
+.story { display: grid; gap: var(--space-8); padding-block: var(--space-8); min-inline-size: 0; align-items: center; }
+.copy { display: grid; gap: var(--space-6); min-inline-size: 0; }
+.copy h2 { max-inline-size: 16ch; text-wrap: balance; }
+.body { color: var(--text-secondary); font-size: var(--type-body-large); max-inline-size: 42ch; }
+.stage { position: relative; perspective: 1000px; aspect-ratio: 1; min-inline-size: 0; }
+.fold { position: absolute; inset: 20% 18%; border-radius: var(--radius-large); box-shadow: var(--elevation-elevated); background: var(--surface); border: var(--border-width) solid var(--border); transform: rotateX(30deg) rotateZ(-20deg); }
+.fold:nth-child(2) { transform: translate(8%, 8%) rotateX(30deg) rotateZ(-6deg); background: var(--foreground); }
+.fold:nth-child(3) { transform: translate(16%, 16%) rotateX(30deg) rotateZ(10deg); background: var(--primary); }
+.axis { position: absolute; inset: 7%; border: var(--border-width) solid var(--border-strong); border-radius: 50%; transform: rotateX(60deg) rotateZ(-30deg); }
+.scene[data-surface="cool"] .fold { inset: 24% 12%; border-radius: 50%; transform: rotateY(38deg) rotateZ(-25deg); }
+.scene[data-surface="cool"] .fold:nth-child(2) { transform: translateY(16%) rotateY(38deg) rotateZ(25deg); }
+.scene[data-surface="cool"] .fold:nth-child(3) { transform: translateY(32%) rotateY(38deg) rotateZ(-25deg); }
+@media (min-width: 60rem) {
+  .story { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-12); }
+}
+@media (min-width: 60rem) and (min-height: 44rem) and (prefers-reduced-motion: no-preference) {
+  .scene { position: sticky; top: var(--space-6); }
+  .scene:focus-within { position: relative; }
+  @supports (animation-timeline: view()) {
+    .stage { animation: sceneTurn linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+  }
+}
+@keyframes sceneTurn { from { transform: translateY(12px) rotate(-3deg); } to { transform: translateY(-12px) rotate(3deg); } }
+@media (max-width: 40rem) { .stage { max-inline-size: 22rem; inline-size: 100%; justify-self: center; } .sequence { padding-block: var(--space-12); gap: var(--space-6); } }
+@media (prefers-reduced-motion: reduce) { .scene { position: relative; } .stage { animation: none; } }
+@media (forced-colors: active) { .stage { display: none; } .scene { position: relative; } .story { grid-template-columns: minmax(0, 1fr); } }

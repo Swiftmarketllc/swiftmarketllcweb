@@ -1,0 +1,41 @@
+﻿.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--grid-gap); }
+.card {
+  position: relative; display: grid; align-content: start; gap: var(--space-8); min-inline-size: 0;
+  padding: clamp(var(--space-6), 3vw, var(--space-10)); border-radius: var(--radius-large);
+  transition: border-color var(--duration-standard) var(--easing-standard), box-shadow var(--duration-standard) var(--easing-standard);
+}
+.card[data-visual="orbit"] { background: var(--surface-story-warm); }
+.card[data-visual="system"] { background: var(--surface-story-cool); }
+.mark { position: relative; aspect-ratio: 8 / 5; min-inline-size: 0; perspective: 900px; }
+.mark span { position: absolute; display: block; transition: transform 500ms var(--easing-standard); }
+.card[data-visual="orbit"] .mark span { inset: 16% 20%; border: clamp(8px, 2vw, 20px) solid var(--primary); border-radius: 50%; transform: rotate(-32deg) rotateY(38deg); box-shadow: inset 3px 3px 0 var(--surface), var(--elevation-subtle); }
+.card[data-visual="orbit"] .mark span:nth-child(2) { inset: 24% 26%; border-color: var(--foreground); transform: rotate(30deg) rotateX(48deg); }
+.card[data-visual="orbit"] .mark span:nth-child(3) { inset: 32% 34%; border-color: var(--surface); transform: rotate(-15deg) rotateY(40deg); }
+.card[data-visual="orbit"] .mark span:nth-child(4) { display: none; }
+.card[data-visual="paper"] .mark span { inline-size: 39%; aspect-ratio: 4 / 5; inset: 9% auto auto 24%; background: var(--surface-story-cool); border: var(--border-width) solid var(--border); border-radius: var(--radius-medium); box-shadow: var(--elevation-elevated); transform: rotate(-18deg); }
+.card[data-visual="paper"] .mark span:nth-child(2) { transform: translate(14%, 5%) rotate(-5deg); background: var(--surface-story-warm); }
+.card[data-visual="paper"] .mark span:nth-child(3) { transform: translate(28%, 10%) rotate(12deg); background: var(--surface); }
+.card[data-visual="paper"] .mark span:nth-child(4) { inset: 35% auto auto 40%; inline-size: 15%; aspect-ratio: 1; background: var(--primary); transform: rotate(12deg); }
+.card[data-visual="system"] .mark span { inset: 15% 20%; border: var(--border-width) solid var(--foreground); background: var(--surface); border-radius: var(--radius-large); box-shadow: var(--elevation-subtle); transform: rotateX(48deg) rotateZ(-25deg); }
+.card[data-visual="system"] .mark span:nth-child(2) { transform: translateY(12%) rotateX(48deg) rotateZ(-25deg); background: var(--foreground); }
+.card[data-visual="system"] .mark span:nth-child(3) { transform: translateY(24%) rotateX(48deg) rotateZ(-25deg); background: var(--primary); }
+.card[data-visual="system"] .mark span:nth-child(4) { display: none; }
+.link { margin-block-start: var(--space-2); }
+.card:focus-within { border-color: var(--foreground); box-shadow: var(--elevation-elevated); }
+@media (min-width: 60rem) {
+  .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: stretch; }
+  .card { grid-column: span 5; }
+  .card:nth-child(3n + 1) { grid-column: span 7; grid-row: span 2; }
+  .card:nth-child(3n + 1) .mark { aspect-ratio: 1; }
+  .card:not(:nth-child(3n + 1)) { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: center; }
+  .card:not(:nth-child(3n + 1)) .mark { aspect-ratio: 1; }
+  .card:not(:nth-child(3n + 1)) .link { grid-column: 2; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .card:hover { border-color: var(--border-strong); box-shadow: var(--elevation-elevated); }
+  .card:hover .mark { transform: translateY(-4px); }
+  .mark { transition: transform var(--duration-standard) var(--easing-standard); }
+  .card[data-visual="paper"]:hover .mark span:nth-child(3) { transform: translate(34%, 3%) rotate(18deg); }
+}
+@media (prefers-reduced-motion: reduce) { .card, .mark, .mark span { transition: none; } }
+@media (forced-colors: active) { .mark { display: none; } .card { box-shadow: none; background: Canvas; } .grid, .card { grid-template-columns: minmax(0, 1fr); } .card, .card:nth-child(3n + 1) { grid-column: auto; grid-row: auto; } }
