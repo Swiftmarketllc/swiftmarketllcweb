@@ -23,8 +23,13 @@ const files = new Set([
   "components/navigation/public-navigation.tsx", "components/navigation/mobile-menu.tsx",
   "lib/data/public-consumers.ts", "lib/data/content.ts", "lib/data/navigation.ts", "lib/data/routes.ts",
   "lib/data/services.ts", "lib/data/industries.ts", "lib/data/packages.ts", "lib/data/relationships.ts",
+  "components/pages/launch-page-body.tsx", "components/pages/public-launch-page.tsx",
+  "components/preview/launch-copy-drafts.ts", "components/preview/enquiry-form-demo.tsx",
+  "components/preview/launch-pages-preview.tsx",
+  ...["services", "industries", "packages", "about", "contact", "privacy"].map(name => `app/${name}/page.tsx`),
 ]);
 const cache = new Map();
+const testEnvironment = { env: { NODE_ENV: "production" } };
 // DOM-free event fixtures only; no browser behavior is claimed by these tests.
 class SyntheticElement {
   constructor(link = null) { this.link = link; }
@@ -40,6 +45,7 @@ function load(file) {
     jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true,
   } }).outputText;
   const localRequire = (name) => {
+    if (name === "next/navigation") return { notFound() { throw new Error("TEST_NOT_FOUND"); } };
     if (["react", "react/jsx-runtime", "next/link"].includes(name)) return require(name);
     const target = name.startsWith("@/") ? resolve(root, name.slice(2)) : resolve(root, dirname(file), name);
     if (name.endsWith(".module.css")) {
@@ -52,7 +58,7 @@ function load(file) {
     assert.ok(resolved, `Unexpected module: ${name}`);
     return load(resolved);
   };
-  runInNewContext(output, { exports, require: localRequire, URL, Element: SyntheticElement });
+  runInNewContext(output, { exports, require: localRequire, URL, Element: SyntheticElement, process: testEnvironment });
   return exports;
 }
 const { Container } = load("components/layout/container.tsx");
@@ -298,4 +304,85 @@ test("Day 1 presentation remains opt-in, token-based, wrap-safe and contrast-saf
   assert.match(css, /padding:\s*clamp\(/); assert.match(css, /forced-colors/);
   assert.match(brand, /\.pill\s*\{\s*border-radius:\s*var\(--radius-pill\)/);
   assert.doesNotMatch(css + brand, /text-stroke\s*:|text-fill-color:\s*transparent|overflow:\s*hidden/);
+});
+
+test("Day 2 route entry points fail closed for canonical drafts and unknown references", () => {
+  const { PublicLaunchPage } = load("components/pages/public-launch-page.tsx");
+  for (const name of ["home", "services", "industries", "packages", "about", "contact", "privacy", "unknown"]) {
+    assert.throws(() => render(PublicLaunchPage, { routeId: `route:${name}` }), /TEST_NOT_FOUND/);
+  }
+  for (const name of ["services", "industries", "packages", "about", "contact", "privacy"]) {
+    assert.throws(() => render(load(`app/${name}/page.tsx`).default, {}), /TEST_NOT_FOUND/);
+  }
+});
+
+test("Day 2 metadata fails closed without draft SEO copy or fabricated canonicals", () => {
+  const { launchPageMetadata } = load("components/pages/public-launch-page.tsx");
+  for (const name of ["home", "services", "industries", "packages", "about", "contact", "privacy"]) {
+    const metadata = launchPageMetadata(`route:${name}`);
+    assert.equal(metadata.robots.index, false);
+    assert.equal(metadata.robots.follow, false);
+    assert.equal(metadata.title, "Page unavailable");
+    assert.equal(metadata.description, "");
+    assert.equal(metadata.alternates, undefined);
+    assert.equal(metadata.openGraph, undefined);
+  }
+});
+
+test("Day 2 editorial drafts preserve exactly seven canonical pairs without approvals or destinations", () => {
+  const { launchCopyDrafts } = load("components/preview/launch-copy-drafts.ts");
+  const names = ["home", "services", "industries", "packages", "about", "contact", "privacy"];
+  assert.equal(launchCopyDrafts.length, 7);
+  assert.equal(new Set(launchCopyDrafts.map(draft => draft.routeId)).size, 7);
+  for (const [index, draft] of launchCopyDrafts.entries()) {
+    assert.equal(draft.routeId, `route:${names[index]}`);
+    assert.equal(draft.contentId, `content:${names[index]}`);
+    assert.equal(draft.status, "draft");
+    assert.match(draft.pending, /TBF/);
+    assert.equal(draft.body.cta, undefined);
+    assert.ok(draft.body.sections.every(section => !section.cta));
+  }
+});
+
+test("Day 2 copy review is development-only and does not add landmarks, links or duplicate IDs", () => {
+  const { LaunchPagesPreview } = load("components/preview/launch-pages-preview.tsx");
+  assert.equal(render(LaunchPagesPreview, {}), "");
+  for (const environment of ["test", "production"]) {
+    testEnvironment.env.NODE_ENV = environment;
+    assert.equal(render(LaunchPagesPreview, {}), "");
+  }
+  testEnvironment.env.NODE_ENV = "development";
+  try {
+    const markup = render(load("app/page.tsx").default, {});
+    assert.equal((markup.match(/<main\b/g) ?? []).length, 1);
+    assert.equal((markup.match(/<h1\b/g) ?? []).length, 1);
+    assert.match(markup, /Day 2 \/ Internal page-copy drafts/);
+    assert.equal((markup.match(/— DRAFT \/ TBF/g) ?? []).length, 7);
+    const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+    assert.equal(new Set(ids).size, ids.length);
+    assert.doesNotMatch(markup, /href="\/(services|industries|packages|about|contact|privacy)/);
+  } finally { testEnvironment.env.NODE_ENV = "production"; }
+});
+
+test("Day 2 provisional enquiry UI cannot submit or serialize personal input", () => {
+  const { EnquiryFormDemo } = load("components/preview/enquiry-form-demo.tsx");
+  const markup = render(EnquiryFormDemo, {});
+  assert.match(markup, /<fieldset disabled=""/);
+  assert.match(markup, /aria-describedby="draft-enquiry-note"/);
+  assert.equal((markup.match(/required=""/g) ?? []).length, 3);
+  assert.equal((markup.match(/<label\b/g) ?? []).length, 5);
+  assert.match(markup, /type="email"/); assert.match(markup, /type="url"/);
+  const button = markup.match(/<button\b[^>]*>/)?.[0] ?? "";
+  assert.match(button, /type="button"/);
+  assert.match(button, /disabled=""/);
+  assert.doesNotMatch(markup, /<form\b|\baction=|\bname=|type="submit"/);
+});
+
+test("Day 2 production root preserves the internal preview and excludes editorial review copy", () => {
+  const markup = render(load("app/page.tsx").default, {});
+  assert.doesNotMatch(markup, /Day 2 \/ Internal page-copy drafts|draft-enquiry-name|Digital growth, marketing and technology/);
+  const metadata = load("app/page.tsx").metadata;
+  assert.equal(metadata.robots.index, false); assert.equal(metadata.robots.follow, false);
+  assert.equal((markup.match(/<main\b/g) ?? []).length, 1);
+  assert.equal((markup.match(/<h1\b/g) ?? []).length, 1);
 });

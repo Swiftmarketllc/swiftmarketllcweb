@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { MainContent } from "@/components/layout/main-content";
 import { UIPrimitivesPreview } from "@/components/preview/ui-primitives-preview";
 import previewStyles from "@/components/preview/ui-primitives-preview.module.css";
+import { LaunchPagesPreview } from "@/components/preview/launch-pages-preview";
+import { PublicLaunchPage } from "@/components/pages/public-launch-page";
+import { getPublicationSafeContentByRouteId } from "@/lib/data/public-consumers";
 
 export const metadata: Metadata = {
   title: "Design System Foundation",
@@ -29,6 +32,8 @@ const typeSamples = [
 ] as const;
 
 export default function DesignSystemPreview() {
+  // Canonical content is still draft. Never substitute review copy here.
+  if (getPublicationSafeContentByRouteId("route:home")) return <PublicLaunchPage routeId="route:home" />;
   return (
     <MainContent>
       <div className="section page-container stack">
@@ -139,6 +144,7 @@ export default function DesignSystemPreview() {
         </p>
       </section>
       <UIPrimitivesPreview />
+      <LaunchPagesPreview />
     </MainContent>
   );
 }
