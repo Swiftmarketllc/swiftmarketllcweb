@@ -3,6 +3,7 @@ import { createHmac, randomUUID } from "node:crypto";
 import { validateEnquiry } from "./validation";
 import type { ValidatedEnquiry } from "./validation";
 import type { FormResult } from "./form-contract";
+import { isSingleMailbox } from "./smtp-config";
 
 /** Owner-confirmed recipient only. Does not configure sender identity or delivery. */
 export const enquiryRecipient = "info@swiftmarketllc.com";
@@ -22,6 +23,8 @@ export type PersistentAbuseControls = Readonly<{
   recordAccepted: (lease: string, receiptReference: string) => Promise<void>;
 }>;
 export type EnquiryDependencies = Readonly<{
+  /** Trusted server configuration override; never taken from an enquiry payload. */
+  recipient?: string;
   readiness: Readonly<{ privacyApproved: boolean; deliveryTested: boolean; abuseTested: boolean; publicationApproved: boolean }>;
   delivery?: DeliveryProvider;
   abuse?: PersistentAbuseControls;
@@ -38,6 +41,7 @@ export function isEnquiryEnabled(deps: EnquiryDependencies): boolean {
   return deps.readiness.privacyApproved === true && deps.readiness.deliveryTested === true
     && deps.readiness.abuseTested === true && deps.readiness.publicationApproved === true
     && !!deps.delivery && !!deps.abuse && !!deps.identify && !!deps.origin
+    && isSingleMailbox(deps.recipient ?? enquiryRecipient)
     && (deps.fingerprintSecret?.length ?? 0) >= 32;
 }
 
@@ -56,7 +60,7 @@ export async function submitEnquiry(input: unknown, key: string, identity: strin
     const reservation = await deps.abuse!.reserve({ identity: opaqueIdentity, key, fingerprint });
     if (reservation.status === "duplicate") return { status: "duplicate" };
     if (reservation.status !== "reserved" || !reservation.lease) return { status: "blocked" };
-    const delivered = await deps.delivery!.send(checked.value, enquiryRecipient, key);
+    const delivered = await deps.delivery!.send(checked.value, deps.recipient ?? enquiryRecipient, key);
     if (delivered.status !== "accepted" || !delivered.providerReceipt.trim()) return { status: "unavailable" };
     const receiptReference = randomUUID();
     await deps.abuse!.recordAccepted(reservation.lease, receiptReference);
