@@ -18,8 +18,18 @@ const files = new Set([
   "components/ui/element-id.ts", "components/ui/section-heading.tsx", "components/ui/button.tsx",
   "components/ui/card.tsx", "components/ui/badge.tsx", "components/preview/ui-primitives-preview.tsx",
   "lib/domain/helpers.ts", "app/page.tsx", "app/layout.tsx", "app/not-found.tsx",
+  "components/ui/cta-link.tsx", "components/sections/color-block.tsx",
+  "components/layout/site-header.tsx", "components/layout/site-footer.tsx",
+  "components/navigation/public-navigation.tsx", "components/navigation/mobile-menu.tsx",
+  "lib/data/public-consumers.ts", "lib/data/content.ts", "lib/data/navigation.ts", "lib/data/routes.ts",
+  "lib/data/services.ts", "lib/data/industries.ts", "lib/data/packages.ts", "lib/data/relationships.ts",
 ]);
 const cache = new Map();
+// DOM-free event fixtures only; no browser behavior is claimed by these tests.
+class SyntheticElement {
+  constructor(link = null) { this.link = link; }
+  closest(selector) { assert.equal(selector, "a[href]"); return this.link; }
+}
 function load(file) {
   assert.ok(files.has(file), `Unexpected source import: ${file}`);
   if (cache.has(file)) return cache.get(file);
@@ -30,7 +40,7 @@ function load(file) {
     jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true,
   } }).outputText;
   const localRequire = (name) => {
-    if (["react/jsx-runtime", "next/link"].includes(name)) return require(name);
+    if (["react", "react/jsx-runtime", "next/link"].includes(name)) return require(name);
     const target = name.startsWith("@/") ? resolve(root, name.slice(2)) : resolve(root, dirname(file), name);
     if (name.endsWith(".module.css")) {
       const css = readFileSync(target, "utf8");
@@ -42,7 +52,7 @@ function load(file) {
     assert.ok(resolved, `Unexpected module: ${name}`);
     return load(resolved);
   };
-  runInNewContext(output, { exports, require: localRequire });
+  runInNewContext(output, { exports, require: localRequire, URL, Element: SyntheticElement });
   return exports;
 }
 const { Container } = load("components/layout/container.tsx");
@@ -176,10 +186,116 @@ test("the integrated preview keeps one main, one H1, unique IDs and real local l
   for (const [, id] of markup.matchAll(/popovertarget="([^"]+)"/gi)) assert.ok(ids.includes(id), `Missing note: ${id}`);
   assert.match(markup, /popover="auto"/);
   assert.match(markup, /popovertargetaction="show"/i); assert.match(markup, /popovertargetaction="hide"/i);
-  assert.doesNotMatch(markup, /<form|<nav|<header|<footer/);
+  assert.doesNotMatch(markup, /<form|<nav/);
+  assert.equal((markup.match(/<header\b/g) ?? []).length, 1);
+  assert.equal((markup.match(/<footer\b/g) ?? []).length, 1);
   assert.equal(page.metadata.robots.index, false); assert.equal(page.metadata.robots.follow, false);
   assert.match(markup, /M3 \/ Internal preview/); assert.match(markup, /M5.1.1 \/ Internal demonstration/);
   const fallback = render(load("app/not-found.tsx").default, {});
   assert.equal((fallback.match(/<main\b/g) ?? []).length, 1);
   assert.match(fallback, /id="main-content" tabindex="-1"/);
+});
+
+// SYNTHETIC TEST FIXTURES ONLY: never imported/exported as production content.
+function publicationFixture() {
+  const approved = value => ({ state: "approved", value, approvalReference: "SYNTHETIC TEST ONLY" });
+  const published = { status: "published", approvalReference: "SYNTHETIC TEST ONLY", publishedAt: "2000-01-01T00:00:00Z" };
+  const cta = routeId => ({ kind: "navigation", intent: "explore", label: "SYNTHETIC TEST ONLY", destination: { routeId } });
+  const ids = ["route:home", "route:about"];
+  return {
+    routes: load("lib/data/routes.ts").routes.map(record => ids.includes(record.id) ? { ...record,
+      publication: published, verification: "reviewed", generation: "static", audience: approved([]),
+      seoIntent: approved("SYNTHETIC TEST ONLY"), dataSource: approved("SYNTHETIC TEST ONLY"),
+      contentOwner: approved("SYNTHETIC TEST ONLY"), template: approved("SYNTHETIC TEST ONLY"), primaryCTA: approved(cta(record.id)),
+      metadata: { title: approved(`SYNTHETIC ${record.id}`), description: approved(`SYNTHETIC DESCRIPTION ${record.id}`) },
+      indexability: approved({ index: false, follow: true, sitemap: false }),
+    } : record),
+    content: load("lib/data/content.ts").content.map(record => ids.includes(record.routeId) ? { ...record,
+      publication: published, title: approved("SYNTHETIC TEST ONLY"), summary: approved("SYNTHETIC TEST ONLY"),
+      heading: approved("SYNTHETIC TEST ONLY"), canonicalPath: approved(record.routeId === "route:home" ? "/" : "/about"),
+      factualReview: approved(true), cta: approved(cta(record.routeId)), sections: approved([
+        { id: "overview", role: "overview", heading: "SYNTHETIC TEST ONLY", body: "SYNTHETIC TEST ONLY", proofIds: [], claims: [] },
+      ]),
+    } : record), proofs: [], origin: approved("https://example.invalid"),
+  };
+}
+
+test("ColorBlock composes validated sections and reading containers with approved opt-in surfaces", () => {
+  const { ColorBlock } = load("components/sections/color-block.tsx");
+  for (const surface of ["warm", "cool"]) {
+    const markup = render(ColorBlock, { surface, id: "test-block", labelledBy: "test-heading", children: createElement("h3", { id: "test-heading" }, "SYNTHETIC TEST ONLY") });
+    assert.match(markup, /^<section/); assert.match(markup, /aria-labelledby="test-heading"/);
+    assert.match(markup, new RegExp(`block ${surface}`)); assert.match(markup, /reading-container/);
+    assert.doesNotMatch(markup, /<main|<h1|style=/);
+  }
+  assert.throws(() => render(ColorBlock, { surface: "invalid", labelledBy: "test-heading" }));
+  assert.throws(() => render(ColorBlock, { surface: "warm", id: "main-content", labelledBy: "test-heading" }));
+});
+
+test("CTA anchors fail closed for drafts, missing records and submit actions without placeholder links", () => {
+  const { CTALink } = load("components/ui/cta-link.tsx");
+  for (const routeId of ["route:home", "route:missing"]) assert.equal(render(CTALink, {
+    cta: { kind: "navigation", intent: "explore", label: "SYNTHETIC TEST ONLY", destination: { routeId } },
+  }), "");
+  assert.equal(render(CTALink, { cta: { kind: "submit-enquiry", intent: "request-proposal", label: "SYNTHETIC TEST ONLY" } }), "");
+  assert.equal(render(CTALink, { cta: { kind: "enquiry-link", intent: "request-consultation", label: "SYNTHETIC TEST ONLY",
+    destination: { routeId: "route:consultation" }, context: { enterprise: true } } }), "");
+});
+
+test("CTA links require eligible target content and verified fragments, preserving native anchor semantics", () => {
+  const { CTALink } = load("components/ui/cta-link.tsx");
+  const sources = publicationFixture();
+  const cta = { kind: "navigation", intent: "explore", label: "SYNTHETIC TEST ONLY", destination: { routeId: "route:about", fragment: "overview" } };
+  assert.match(render(CTALink, { cta, sources }), /^<a href="\/about#overview" class="button-base pill button-primary"/);
+  assert.doesNotMatch(render(CTALink, { cta, sources, variant: "secondary" }), /button-primary|<button/);
+  assert.match(render(CTALink, { cta, sources, variant: "text" }), /class="textLink"/);
+  assert.equal(render(CTALink, { cta: { ...cta, destination: { ...cta.destination, fragment: "missing" } }, sources }), "");
+  const drafts = { ...sources, content: sources.content.map(record => record.routeId === "route:about" ? { ...record, publication: { status: "draft" } } : record) };
+  assert.equal(render(CTALink, { cta, sources: drafts }), "");
+});
+
+test("empty canonical shell omits navigation and menu controls and never links to the internal preview", () => {
+  const header = render(load("components/layout/site-header.tsx").SiteHeader, {});
+  const footer = render(load("components/layout/site-footer.tsx").SiteFooter, {});
+  assert.match(header, /^<header/); assert.match(header, /<span class="brand">Swift Market LLC/);
+  assert.match(footer, /^<footer/);
+  assert.doesNotMatch(header + footer, /href=|<nav|<summary|<details|<button|<main|<h1/);
+});
+
+test("populated synthetic shell resolves only eligible canonical header/footer destinations", () => {
+  const sources = publicationFixture();
+  const header = render(load("components/layout/site-header.tsx").SiteHeader, { sources });
+  const footer = render(load("components/layout/site-footer.tsx").SiteFooter, { sources });
+  assert.match(header, /href="\/"/); assert.match(header, /<summary class="button-base">Menu/);
+  assert.match(header + footer, /href="\/about"/);
+  const links = [...(header + footer).matchAll(/href="([^"]+)"/g)].map(match => match[1]);
+  assert.ok(links.length > 0); assert.ok(links.every(path => path === "/" || path === "/about"));
+  assert.doesNotMatch(header + footer, /<main|<h1|role="menu"/);
+});
+
+test("mobile disclosure Escape restores summary focus and link activation closes without trapping Tab", () => {
+  const { MobileMenu } = load("components/navigation/mobile-menu.tsx");
+  assert.equal(MobileMenu({ children: null }), null);
+  const menu = MobileMenu({ children: createElement("nav", null, "SYNTHETIC TEST ONLY") });
+  assert.equal(menu.type, "details");
+  let focused = 0, prevented = 0;
+  const details = { open: true, querySelector: selector => { assert.equal(selector, "summary"); return { focus: () => focused++ }; } };
+  menu.props.onKeyDown({ key: "Tab", currentTarget: details, preventDefault: () => prevented++ });
+  assert.equal(details.open, true); assert.equal(prevented, 0);
+  menu.props.onKeyDown({ key: "Escape", currentTarget: details, preventDefault: () => prevented++ });
+  assert.equal(details.open, false); assert.equal(focused, 1); assert.equal(prevented, 1);
+  details.open = true;
+  menu.props.onClick({ target: new SyntheticElement({}), currentTarget: details });
+  assert.equal(details.open, false);
+});
+
+test("Day 1 presentation remains opt-in, token-based, wrap-safe and contrast-safe", () => {
+  const css = readFileSync(resolve(root, "components/sections/color-block.module.css"), "utf8");
+  const brand = readFileSync(resolve(root, "components/ui/brand-presentation.module.css"), "utf8");
+  assert.match(css, /background:\s*var\(--surface-story-warm\)/);
+  assert.match(css, /background:\s*var\(--surface-story-cool\)/);
+  assert.match(css, /:global\(\.text-muted\)\s*\{\s*color:\s*var\(--text-secondary\)/);
+  assert.match(css, /padding:\s*clamp\(/); assert.match(css, /forced-colors/);
+  assert.match(brand, /\.pill\s*\{\s*border-radius:\s*var\(--radius-pill\)/);
+  assert.doesNotMatch(css + brand, /text-stroke\s*:|text-fill-color:\s*transparent|overflow:\s*hidden/);
 });

@@ -26,6 +26,9 @@
   --brand-warm-red: #ff4e45;
   --brand-outer-space: #11182f;
   --brand-perfect-white: #ffffff;
+  /* Approved Day 1 opt-in storytelling roles; existing M3 tokens stay intact. */
+  --surface-story-warm: #ffeae9;
+  --surface-story-cool: #e7e8ea;
   --background: var(--brand-perfect-white);
   --foreground: var(--brand-outer-space);
   --primary: var(--brand-warm-red);

@@ -1,0 +1,20 @@
+.blockContainer { min-inline-size: 0; }
+:global(.page-container) .blockContainer { inline-size: 100%; }
+
+.block {
+  min-inline-size: 0;
+  padding: clamp(var(--space-6), calc(var(--space-4) + 2vw), var(--space-12));
+  border-radius: var(--radius-large);
+  color: var(--foreground);
+  overflow-wrap: anywhere;
+}
+
+.warm { background: var(--surface-story-warm); }
+.cool { background: var(--surface-story-cool); }
+
+/* Supporting copy on pastels must use the accessible secondary role. */
+.block :global(.text-muted) { color: var(--text-secondary); }
+
+@media (forced-colors: active) {
+  .block { border: var(--border-width) solid CanvasText; }
+}

@@ -40,3 +40,6 @@
   color: var(--foreground);
   overflow-wrap: anywhere;
 }
+
+.shellExample { min-inline-size: 0; border: var(--border-width) solid var(--border); border-radius: var(--radius-large); }
+.shellCaption { padding: var(--space-6); color: var(--text-secondary); overflow-wrap: anywhere; }

@@ -1,0 +1,11 @@
+.header, .footer { background: var(--surface); color: var(--foreground); }
+.header { padding-block: var(--space-4); }
+.headerInner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.brand { display: inline-flex; align-items: center; min-block-size: var(--control-min); color: var(--foreground); font-weight: var(--weight-heading); text-decoration: none; overflow-wrap: anywhere; }
+a.brand:hover { text-decoration: underline; }
+.footer { padding-block: var(--space-8); border-block-start: var(--border-width) solid var(--border); }
+.desktopNavigation { display: none; min-inline-size: 0; }
+
+@media (min-width: 48rem) {
+  .desktopNavigation { display: block; }
+}

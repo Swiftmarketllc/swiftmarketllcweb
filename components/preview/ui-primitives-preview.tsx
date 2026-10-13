@@ -4,6 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { ColorBlock } from "@/components/sections/color-block";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { CTALink } from "@/components/ui/cta-link";
+import presentation from "@/components/ui/brand-presentation.module.css";
 import styles from "./ui-primitives-preview.module.css";
 
 /** Internal interface demonstrations only; no business records or enquiry actions. */
@@ -47,6 +52,30 @@ export function UIPrimitivesPreview() {
             <Button variant="secondary" popoverTarget="ui-primitives-note" popoverTargetAction="hide">Close preview note</Button>
           </div>
         </Section>
+        <Section spacing="compact" labelledBy="day-one-heading">
+          <SectionHeading id="day-one-heading" level={3} heading="Day 1 / Internal presentation"
+            description="Shell and surface examples only. Navigation and CTA links remain omitted while destinations are unpublished." />
+          <div className={styles.shellExample}>
+            <SiteHeader />
+            <p className={styles.shellCaption}>Internal shell demonstration — no production navigation is published.</p>
+            <SiteFooter />
+          </div>
+          <CTALink cta={{ kind: "navigation", intent: "explore", label: "Home", destination: { routeId: "route:home" } }} />
+        </Section>
+        <ColorBlock surface="warm" labelledBy="warm-story-heading">
+          <SectionHeading id="warm-story-heading" level={3} heading="Warm storytelling surface"
+            description="The approved warm pastel uses solid navy headings and readable supporting text." />
+          <Button className={presentation.pill} popoverTarget="ui-primitives-note" popoverTargetAction="show">Open preview note</Button>
+        </ColorBlock>
+        <ColorBlock surface="cool" labelledBy="cool-story-heading">
+          <SectionHeading id="cool-story-heading" level={3} heading="Cool storytelling surface"
+            description="Existing typography and spacing support a quiet editorial panel." />
+          <Card className={`${presentation.roundedCard} stack`}>
+            <SectionHeading level={4} heading="Opt-in rounded card" />
+            <p className="text-secondary">Presentation only. The Card contract and its default appearance remain unchanged.</p>
+            <Badge>Internal example</Badge>
+          </Card>
+        </ColorBlock>
       </Container>
     </Section>
   );

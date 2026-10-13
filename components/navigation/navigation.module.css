@@ -1,0 +1,12 @@
+.navigation { min-inline-size: 0; display: flex; flex-wrap: wrap; gap: var(--space-6); }
+.links { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; padding: 0; }
+.links li { min-inline-size: 0; max-inline-size: 100%; }
+.links summary { min-block-size: var(--control-min); padding: var(--space-2); cursor: pointer; }
+.mobileMenu { min-inline-size: 0; width: 100%; }
+.mobileMenu > summary { cursor: pointer; border-radius: var(--radius-pill); }
+.menuPanel { padding-block: var(--space-4); }
+.menuPanel .navigation, .menuPanel .links { flex-direction: column; }
+
+@media (min-width: 48rem) {
+  .mobileMenu { display: none; }
+}
