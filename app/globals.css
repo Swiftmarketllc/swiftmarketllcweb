@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* Pin solid local faces: some installed outline fonts identify themselves as
+   Helvetica Neue / Bold. Full/PostScript names avoid that family-name collision.
+   No font files are downloaded or bundled; unavailable faces use the next fallback. */
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("HelveticaNeue"), local("HelveticaNeue-Roman"), local("Helvetica Neue Regular");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("HelveticaNeue-Bold"), local("Helvetica Neue Bold");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 /* Approved M3 brand values: centralized for the current baseline.
    Warm Red is an accent, not a small-text color on white. */
 :root {

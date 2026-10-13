@@ -1,0 +1,10 @@
+.container,
+.section,
+.main {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.section {
+  scroll-margin-block-start: var(--space-6);
+}

@@ -1,0 +1,42 @@
+.samples,
+.actionGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-block-start: var(--space-6);
+}
+
+.samples {
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.actionGroup {
+  align-items: center;
+}
+
+/* Contextual action layout only; badge samples retain their natural widths. */
+@media (max-width: 40rem) {
+  .actionGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actionGroup > :is(button, a) {
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: var(--control-min);
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+.note {
+  inline-size: min(calc(100% - 2 * var(--page-gutter)), var(--measure-reading));
+  padding: var(--space-6);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+  color: var(--foreground);
+  overflow-wrap: anywhere;
+}

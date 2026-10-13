@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { MainContent } from "@/components/layout/main-content";
+import { UIPrimitivesPreview } from "@/components/preview/ui-primitives-preview";
+import previewStyles from "@/components/preview/ui-primitives-preview.module.css";
 
 export const metadata: Metadata = {
   title: "Design System Foundation",
@@ -27,7 +30,7 @@ const typeSamples = [
 
 export default function DesignSystemPreview() {
   return (
-    <main id="main-content" tabIndex={-1}>
+    <MainContent>
       <div className="section page-container stack">
         <p className="type-eyebrow text-secondary">M3 / Internal preview</p>
         <h1 className="type-h1">Swift Market LLC — Design System Foundation</h1>
@@ -125,7 +128,7 @@ export default function DesignSystemPreview() {
           inspect state changes. Select text to inspect the selection colors.
         </p>
         <a href="#palette-heading">Text link — return to the palette</a>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className={previewStyles.actionGroup}>
           <a href="#type-heading" className="button-base button-primary">Primary style — view type</a>
           <a href="#layout-heading" className="button-base">Neutral style — view layout</a>
           <button type="button" className="button-base button-primary" disabled>Disabled sample</button>
@@ -135,6 +138,7 @@ export default function DesignSystemPreview() {
           navigation, services, packages, and footer are deferred.
         </p>
       </section>
-    </main>
+      <UIPrimitivesPreview />
+    </MainContent>
   );
 }

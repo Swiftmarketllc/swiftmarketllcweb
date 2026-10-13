@@ -1,0 +1,48 @@
+.headingGroup {
+  display: grid;
+  gap: var(--space-3);
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.description {
+  max-inline-size: var(--measure-reading);
+}
+
+.button {
+  min-inline-size: var(--control-min);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.card {
+  min-inline-size: 0;
+  padding: var(--space-6);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+  color: var(--foreground);
+  overflow-wrap: anywhere;
+}
+
+.badge {
+  display: inline-block;
+  max-inline-size: 100%;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-width) solid currentColor;
+  border-radius: var(--radius-small);
+  background: var(--surface);
+  font-size: var(--type-label);
+  line-height: var(--leading-label);
+  overflow-wrap: anywhere;
+}
+
+.neutral { color: var(--text-secondary); }
+.success { color: var(--success); }
+.warning { color: var(--warning); }
+.error { color: var(--error); }
+
+@media (forced-colors: active) {
+  .card,
+  .badge { border-color: CanvasText; }
+}
