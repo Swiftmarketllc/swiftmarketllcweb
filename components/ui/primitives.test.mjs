@@ -26,6 +26,7 @@ const files = new Set([
   "components/pages/launch-page-body.tsx", "components/pages/public-launch-page.tsx",
   "components/preview/launch-copy-drafts.ts", "components/preview/enquiry-form-demo.tsx",
   "components/preview/launch-pages-preview.tsx",
+  "components/forms/enquiry-form.tsx", "lib/enquiry/form-contract.ts",
   ...["services", "industries", "packages", "about", "contact", "privacy"].map(name => `app/${name}/page.tsx`),
 ]);
 const cache = new Map();
@@ -385,4 +386,20 @@ test("Day 2 production root preserves the internal preview and excludes editoria
   assert.equal(metadata.robots.index, false); assert.equal(metadata.robots.follow, false);
   assert.equal((markup.match(/<main\b/g) ?? []).length, 1);
   assert.equal((markup.match(/<h1\b/g) ?? []).length, 1);
+});
+
+test("Phase 2 enquiry form uses labelled provisional fields and disables public submission by default", () => {
+  const { EnquiryForm } = load("components/forms/enquiry-form.tsx");
+  const markup = render(EnquiryForm, {});
+  assert.match(markup, /<form[^>]*aria-describedby=/);
+  assert.match(markup, /<fieldset disabled=""/);
+  assert.match(markup, /role="status" aria-live="polite" tabindex="-1"/);
+  assert.equal((markup.match(/required=""/g) ?? []).length, 3);
+  for (const name of ["name", "email", "message", "company", "website"]) assert.match(markup, new RegExp(`name="${name}"`));
+  const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  for (const [, id] of markup.matchAll(/for="([^"]+)"/g)) assert.ok(ids.includes(id));
+  const honeypot = markup.match(/<input[^>]*name="companyFax"[^>]*>/)?.[0] ?? "";
+  assert.match(honeypot, /tabindex="-1"/);
+  assert.match(markup, /Submission unavailable/);
+  assert.doesNotMatch(markup, /action=|info@swiftmarketllc|Your enquiry was accepted/);
 });

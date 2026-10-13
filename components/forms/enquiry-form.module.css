@@ -1,0 +1,15 @@
+.form { display: grid; gap: var(--space-4); min-inline-size: 0; overflow-wrap: anywhere; }
+.fields { display: grid; gap: var(--space-5); min-inline-size: 0; padding: var(--space-4); border: var(--border-width) solid var(--border); }
+.field { display: grid; gap: var(--space-2); min-inline-size: 0; }
+.field input, .field textarea {
+  inline-size: 100%; min-inline-size: 0; min-block-size: var(--control-min);
+  padding: var(--space-3); border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-small); background: var(--surface); color: var(--foreground);
+  font: inherit; opacity: 1;
+}
+.field textarea { resize: vertical; }
+.error { color: var(--error); }
+.honeypot { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (forced-colors: active) {
+  .fields, .field input, .field textarea { border-color: CanvasText; }
+}

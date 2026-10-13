@@ -4,6 +4,7 @@ import { LaunchPageBody } from "@/components/pages/launch-page-body";
 import { launchCopyDrafts } from "./launch-copy-drafts";
 import { EnquiryFormDemo } from "./enquiry-form-demo";
 import styles from "./launch-pages-preview.module.css";
+import { EnquiryForm } from "@/components/forms/enquiry-form";
 
 /** Development-only review inside the existing noindex preview, never a public page. */
 export function LaunchPagesPreview() {
@@ -16,7 +17,13 @@ export function LaunchPagesPreview() {
         <summary>{draft.path} — DRAFT / TBF</summary>
         <p className={styles.pending}>{draft.pending}</p>
         <LaunchPageBody {...draft.body} reviewPrefix={`launch-review-${index}`} />
-        {draft.routeId === "route:contact" && <EnquiryFormDemo />}
+        {draft.routeId === "route:contact" && <>
+          <EnquiryFormDemo />
+          <Container width="reading" className="section-compact stack">
+            <p>Phase 2 / Secure enquiry UI foundation — disabled internal demonstration</p>
+            <EnquiryForm />
+          </Container>
+        </>}
       </details>)}
     </Container>
   </Section>;
