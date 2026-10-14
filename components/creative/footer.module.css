@@ -1,0 +1,80 @@
+/* Closing band + structured footer, both on Outer Space. */
+.band {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(4.5rem, 2rem + 9vw, 10rem);
+  background:
+    radial-gradient(48rem 26rem at 88% 100%, color-mix(in srgb, var(--cp-accent) 30%, transparent), transparent 70%),
+    var(--cp-ink);
+}
+.bandGrid { display: grid; gap: var(--space-6); }
+.bandLabel { color: var(--cp-on-dark-soft); }
+.bandTitle { font-size: clamp(2.5rem, 11vw, 4.5rem); }
+.bandBody p { max-inline-size: 38ch; font-size: clamp(1rem, 0.95rem + 0.3vw, 1.2rem); color: var(--cp-on-dark-soft); }
+
+.footer { position: relative; overflow: hidden; padding-block-start: clamp(3rem, 2rem + 4vw, 6rem); border-block-start: var(--border-width) solid var(--cp-rule-dark); background: var(--cp-ink); }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-10) var(--grid-gap); }
+.brand { grid-column: 1 / -1; }
+.brand p { max-inline-size: 36ch; margin-block-start: var(--space-4); font-size: var(--type-body-small); color: var(--cp-on-dark-soft); }
+.wordmark, .wordmark:hover { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--cp-paper); font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; }
+.col h2 { margin-block-end: var(--space-4); color: var(--cp-on-dark-soft); font-weight: 400; }
+.col ul { display: grid; gap: var(--space-1); }
+.col a, .col a:hover, .disabled { display: inline-flex; align-items: center; gap: var(--space-2); min-block-size: 2.25rem; color: var(--cp-paper); text-decoration: none; }
+.col a { background: linear-gradient(currentColor, currentColor) no-repeat 0 calc(50% + 0.8em) / 0 1px; transition: background-size var(--duration-slow) var(--cp-ease), color var(--duration-standard) var(--easing-standard); }
+.col a:hover, .col a:focus-visible { color: var(--cp-accent); background-size: 100% 1px; }
+.mail svg { transition: translate var(--duration-slow) var(--cp-ease); }
+.mail:hover svg { translate: 0.25rem -0.1rem; }
+.disabled { color: color-mix(in srgb, var(--cp-paper) 42%, transparent); cursor: not-allowed; }
+.tag { font-family: var(--font-code); font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; border: var(--border-width) solid currentColor; border-radius: var(--radius-pill); padding: 0 var(--space-2); white-space: nowrap; }
+
+.mega {
+  margin-block: clamp(2.5rem, 2rem + 5vw, 6rem) 0;
+  padding-inline: var(--page-gutter);
+  font-size: clamp(3rem, 14.4vw, 17rem);
+  font-weight: 600;
+  line-height: 0.82;
+  letter-spacing: -0.065em;
+  text-align: center;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--cp-paper) 30%, transparent);
+  user-select: none;
+  transition: color 600ms var(--easing-standard);
+}
+.mega:hover { color: color-mix(in srgb, var(--cp-accent) 90%, var(--cp-ink)); -webkit-text-stroke-color: transparent; }
+
+.legalBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  padding-block: var(--space-5) var(--space-6);
+  border-block-start: var(--border-width) solid var(--cp-rule-dark);
+  font-family: var(--font-code);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cp-on-dark-soft);
+}
+.legalBar a, .legalBar a:hover { color: inherit; }
+
+@media (min-width: 48rem) {
+  .bandGrid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--grid-gap); align-items: end; }
+  .bandLabel { grid-column: 1 / -1; }
+  .bandTitle { grid-column: 1 / span 7; font-size: clamp(3rem, min(6.6vw, 13svh), 7.5rem); }
+  .bandBody { grid-column: 9 / -1; }
+  .cols { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .brand { grid-column: 1 / span 4; }
+  .col { grid-column: span 2; }
+  .col:nth-of-type(1) { grid-column: 5 / span 2; }
+}
+@media (min-width: 48rem) {
+  .mega { margin-block-end: calc(-1 * var(--space-4)); }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .mega { animation: megaIn linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+  }
+}
+@keyframes megaIn { from { opacity: 0; transform: translateY(32%); } }
