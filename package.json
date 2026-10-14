@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test",
+    "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
   "dependencies": {
     "next": "16.3.8",

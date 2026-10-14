@@ -104,7 +104,7 @@ export function areCTAsEquivalent(a: CTA, b: CTA): boolean {
   if (a.kind === "submit-enquiry") return b.kind === "submit-enquiry";
   if (b.kind === "submit-enquiry" || a.destination.routeId !== b.destination.routeId) return false;
   if (a.kind === "navigation") return b.kind === "navigation" && a.destination.fragment === b.destination.fragment;
-  return b.kind === "enquiry-link" && a.approvedOfferId === b.approvedOfferId && sameSelection(a.context, b.context);
+  return b.kind === "enquiry-link" && sameSelection(a.context, b.context);
 }
 function contentFragments(source: readonly PageContent[]): RouteFragmentValidator {
   return (routeId, fragment) => {

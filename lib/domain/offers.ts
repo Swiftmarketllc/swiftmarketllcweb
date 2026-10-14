@@ -1,16 +1,18 @@
 import type {
   AddOnId,
+  ApprovalReference,
   Availability,
   Decision,
   PackageId,
   PackageSegment,
   PackageTier,
-  PartnershipId,
   ProjectId,
   Publication,
   RouteId,
+  ScopedValue,
   ServiceId,
   Slug,
+  Timestamp,
 } from "./core";
 import type { CommercialTerms, OfferScope } from "./commercial";
 import type { CTA } from "./routes";
@@ -31,11 +33,38 @@ type OfferIdentity<Id extends string> = Readonly<{
   cta: Decision<CTA>;
 }>;
 
+/**
+ * Doc 00 §8 "Terms/version": a published version is immutable so existing client
+ * scope is preserved; any scope change creates a new, higher version number.
+ */
+export type PackageVersion =
+  | Readonly<{ number: number; status: "draft" }>
+  | Readonly<{
+      number: number;
+      status: "approved";
+      approvalReference: ApprovalReference;
+      effectiveFrom: Timestamp;
+      supersedes?: number;
+    }>;
+
+export type CapabilityId = `capability:${string}`;
+
+/** One row of the doc 06 per-tier scope matrix. Values stay TBF until commercial freeze. */
+export type CapabilityRow = Readonly<{
+  id: CapabilityId;
+  label: string;
+  value: ScopedValue<string>;
+  services: Decision<readonly ServiceId[]>;
+}>;
+export type CapabilityMatrix = readonly CapabilityRow[];
+
 export type PackageFor<S extends PackageSegment, T extends PackageTier> =
   OfferIdentity<PackageId<S, T>> & Readonly<{
     kind: "package";
     segment: S;
     tier: T;
+    version: PackageVersion;
+    capabilities: CapabilityMatrix;
   }>;
 
 export type Package = {
@@ -89,16 +118,5 @@ export type EnterpriseOffering = Readonly<{
   pricing: Readonly<{ state: "custom-quote"; note?: string }>;
   externalCosts: CommercialTerms["externalCosts"];
   scope: OfferScope;
-  cta: Decision<CTA>;
-}>;
-
-export type PartnershipOffering = Readonly<{
-  id: PartnershipId;
-  kind: "agency-partnership";
-  publication: Publication;
-  routeId: "route:partnerships";
-  description: Decision<string>;
-  collaborationOptions: Decision<readonly string[]>;
-  terms: Decision<string>;
   cta: Decision<CTA>;
 }>;

@@ -86,26 +86,26 @@ The future system must support all approved service families below. Their inclus
 | --- | --- |
 | Strategy & Consulting | Shared service contract defined below |
 | SEO | Shared service contract defined below |
-| Local SEO / Google Business Profile | Shared service contract defined below |
-| AI Search / AEO / GEO | Shared service contract defined below |
-| Authority / Digital PR | Shared service contract defined below |
-| Paid Advertising / PPC | Shared service contract defined below |
-| Platform-specific advertising | Shared service contract defined below |
-| Social Media Management | Shared service contract defined below |
+| Local SEO | Shared service contract defined below |
+| AI Search Visibility | Shared service contract defined below |
+| Authority & PR | Shared service contract defined below |
+| Paid Advertising | Shared service contract defined below |
+| Specialist Campaigns | Shared service contract defined below |
+| Social Media | Shared service contract defined below |
 | Content Marketing | Shared service contract defined below |
-| Branding & Graphic Design | Shared service contract defined below |
-| Video / Creative Production | Shared service contract defined below |
-| Website Design & Development | Shared service contract defined below |
-| App / MVP Design & Development | Shared service contract defined below |
-| Website Care / Maintenance | Shared service contract defined below |
-| CRO | Shared service contract defined below |
-| Email / SMS Marketing | Shared service contract defined below |
-| CRM & Marketing Automation | Shared service contract defined below |
-| AI Automation | Shared service contract defined below |
-| B2B Marketing / Lead Generation | Shared service contract defined below |
-| Analytics / Tracking / Reporting | Shared service contract defined below |
-| Business Integrations | Shared service contract defined below |
-| Enterprise Marketing / Growth Leadership | Shared service contract defined below |
+| Branding & Design | Shared service contract defined below |
+| Photo & Video | Shared service contract defined below |
+| Website Development | Shared service contract defined below |
+| App / MVP Development | Shared service contract defined below |
+| Website Care | Shared service contract defined below |
+| Conversion Optimization | Shared service contract defined below |
+| Email & SMS | Shared service contract defined below |
+| CRM & Automation | Shared service contract defined below |
+| AI & Automation | Shared service contract defined below |
+| B2B Marketing | Shared service contract defined below |
+| Analytics & Tracking | Shared service contract defined below |
+| Business Technology & Integrations | Shared service contract defined below |
+| Enterprise Leadership | Shared service contract defined below |
 
 Each family and its future service records must be able to use this typed content contract:
 
@@ -125,7 +125,7 @@ Advertising/social channels may include Google, Meta, TikTok, YouTube, Snapchat,
 
 ## 6. Industry / Niche Architecture
 
-Approved priority/representative industries are Healthcare; Real Estate; Home Services; E-commerce; SaaS / AI / Technology; Restaurants / Franchises; Legal; Education; Finance; Automotive; and B2B / Professional Services.
+Approved priority/representative industries are Healthcare; Real Estate; Home Services; Ecommerce; SaaS / AI / Technology; Restaurants / Franchises; Legal; Education; Finance; Automotive; B2B / Professional Services; Travel / Hospitality; Beauty; Fitness; Fashion; Construction; Logistics; and Recruitment.
 
 Industry content must use reusable page composition with centralized industry records and relationships to relevant services. Records should support identity, description, relevant problems, linked services/packages, approved evidence, FAQs, CTA, and SEO fields. Additional industries must be addable through shared content/data rather than copying the whole site.
 

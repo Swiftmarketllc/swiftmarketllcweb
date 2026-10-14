@@ -3,7 +3,6 @@
  * No values, logging, persistence, client props or provider integration are implemented.
  */
 import type {
-  AuditOfferId,
   Decision,
   EnquiryId,
   LeadId,
@@ -28,9 +27,7 @@ export type EnquiryIntent =
   | Readonly<{ kind: "package"; selection: PackageSelection }>
   | Readonly<{ kind: "individual-service"; serviceId: ServiceId }>
   | Readonly<{ kind: "one-time-project"; projectId?: ProjectId }>
-  | EnterpriseSelection
-  | Readonly<{ kind: "partnership"; collaboration?: string }>
-  | Readonly<{ kind: "audit"; approvedOfferId: AuditOfferId }>;
+  | EnterpriseSelection;
 
 export type EnquiryType = EnquiryIntent["kind"];
 

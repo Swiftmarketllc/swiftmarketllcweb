@@ -32,26 +32,26 @@ Each row has exactly one ServiceFamily record. IDs retain the M4.3 family:slug c
 | --- | --- | --- | --- | --- |
 | Strategy & Consulting | family:strategy-consulting | strategy-consulting | /services/strategy-consulting | 0 |
 | SEO | family:seo | seo | /services/seo | 0 |
-| Local SEO / Google Business Profile | family:local-seo-google-business-profile | local-seo-google-business-profile | /services/local-seo-google-business-profile | 0 |
-| AI Search / AEO / GEO | family:ai-search-aeo-geo | ai-search-aeo-geo | /services/ai-search-aeo-geo | 0 |
-| Authority / Digital PR | family:authority-digital-pr | authority-digital-pr | /services/authority-digital-pr | 0 |
-| Paid Advertising / PPC | family:paid-advertising-ppc | paid-advertising-ppc | /services/paid-advertising-ppc | 0 |
-| Platform-specific advertising | family:platform-advertising | platform-advertising | /services/platform-advertising | 0 |
-| Social Media Management | family:social-media-management | social-media-management | /services/social-media-management | 0 |
+| Local SEO | family:local-seo | local-seo | /services/local-seo | 0 |
+| AI Search Visibility | family:ai-search-visibility | ai-search-visibility | /services/ai-search-visibility | 0 |
+| Authority & PR | family:authority-pr | authority-pr | /services/authority-pr | 0 |
+| Paid Advertising | family:paid-advertising | paid-advertising | /services/paid-advertising | 0 |
+| Specialist Campaigns | family:specialist-campaigns | specialist-campaigns | /services/specialist-campaigns | 0 |
+| Social Media | family:social-media | social-media | /services/social-media | 0 |
 | Content Marketing | family:content-marketing | content-marketing | /services/content-marketing | 0 |
-| Branding & Graphic Design | family:branding-graphic-design | branding-graphic-design | /services/branding-graphic-design | 0 |
-| Video / Creative Production | family:video-creative-production | video-creative-production | /services/video-creative-production | 0 |
-| Website Design & Development | family:website-design-development | website-design-development | /services/website-design-development | 0 |
-| App / MVP Design & Development | family:app-mvp-design-development | app-mvp-design-development | /services/app-mvp-design-development | 0 |
-| Website Care / Maintenance | family:website-care-maintenance | website-care-maintenance | /services/website-care-maintenance | 0 |
-| CRO | family:cro | cro | /services/cro | 0 |
-| Email / SMS Marketing | family:email-sms-marketing | email-sms-marketing | /services/email-sms-marketing | 0 |
-| CRM & Marketing Automation | family:crm-marketing-automation | crm-marketing-automation | /services/crm-marketing-automation | 0 |
-| AI Automation | family:ai-automation | ai-automation | /services/ai-automation | 0 |
-| B2B Marketing / Lead Generation | family:b2b-marketing-lead-generation | b2b-marketing-lead-generation | /services/b2b-marketing-lead-generation | 0 |
-| Analytics / Tracking / Reporting | family:analytics-tracking-reporting | analytics-tracking-reporting | /services/analytics-tracking-reporting | 0 |
-| Business Integrations | family:business-integrations | business-integrations | /services/business-integrations | 0 |
-| Enterprise Marketing / Growth Leadership | family:enterprise-marketing-growth-leadership | enterprise-marketing-growth-leadership | /services/enterprise-marketing-growth-leadership | 0 |
+| Branding & Design | family:branding-design | branding-design | /services/branding-design | 0 |
+| Photo & Video | family:photo-video | photo-video | /services/photo-video | 0 |
+| Website Development | family:website-development | website-development | /services/website-development | 0 |
+| App / MVP Development | family:app-mvp-development | app-mvp-development | /services/app-mvp-development | 0 |
+| Website Care | family:website-care | website-care | /services/website-care | 0 |
+| Conversion Optimization | family:conversion-optimization | cro | /services/conversion-optimization | 0 |
+| Email & SMS | family:email-sms | email-sms | /services/email-sms | 0 |
+| CRM & Automation | family:crm-automation | crm-automation | /services/crm-automation | 0 |
+| AI & Automation | family:ai-automation | ai-automation | /services/ai-automation | 0 |
+| B2B Marketing | family:b2b-marketing | b2b-marketing | /services/b2b-marketing | 0 |
+| Analytics & Tracking | family:analytics-tracking | analytics-tracking | /services/analytics-tracking | 0 |
+| Business Technology & Integrations | family:business-technology-integrations | business-technology-integrations | /services/business-technology-integrations | 0 |
+| Enterprise Leadership | family:enterprise-leadership | enterprise-leadership | /services/enterprise-leadership | 0 |
 
 The keyed source satisfies a mapped type covering every ServiceFamilySlug, with each ID/slug pair correlated to its key. A single ordered serviceFamilies view references those same canonical records; there is no second copy of the inventory. Display names do not automatically change IDs or slugs. Future renames follow the reviewed M4.2 migration process.
 

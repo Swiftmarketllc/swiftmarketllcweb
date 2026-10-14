@@ -47,19 +47,18 @@ The following register is the complete proposed route inventory for this documen
 | /services | MVP | Capability discovery | All business segments; individual-service prospects | Request a Consultation | / | Family directory; individual/project entry; package links |
 | /packages | MVP | Recurring solution evaluation | Startup and Growing Business prospects | Compare Packages | / | Segment hubs; custom enterprise alternative |
 | /packages/startup | MVP | Startup package evaluation | Startup Business | Request a Proposal | /packages | Exactly Basic, Standard, Premium; approved service references |
-| /packages/startup/basic | MVP | Startup Basic scope evaluation | Startup Business | Request a Proposal | /packages/startup | Startup + Basic record; approved services/add-ons |
-| /packages/startup/standard | MVP | Startup Standard scope evaluation | Startup Business | Request a Proposal | /packages/startup | Startup + Standard record; approved services/add-ons |
-| /packages/startup/premium | MVP | Startup Premium scope evaluation | Startup Business | Request a Proposal | /packages/startup | Startup + Premium record; approved services/add-ons |
+| /packages/startup-basic | MVP | Startup Basic scope evaluation | Startup Business | Request a Proposal | /packages/startup | Startup + Basic record; approved services/add-ons |
+| /packages/startup-standard | MVP | Startup Standard scope evaluation | Startup Business | Request a Proposal | /packages/startup | Startup + Standard record; approved services/add-ons |
+| /packages/startup-premium | MVP | Startup Premium scope evaluation | Startup Business | Request a Proposal | /packages/startup | Startup + Premium record; approved services/add-ons |
 | /packages/growing-business | MVP | Growing Business package evaluation | Growing Business | Request a Proposal | /packages | Exactly Basic, Standard, Premium; approved service references |
-| /packages/growing-business/basic | MVP | Growing Business Basic scope evaluation | Growing Business | Request a Proposal | /packages/growing-business | Growing Business + Basic record; approved services/add-ons |
-| /packages/growing-business/standard | MVP | Growing Business Standard scope evaluation | Growing Business | Request a Proposal | /packages/growing-business | Growing Business + Standard record; approved services/add-ons |
-| /packages/growing-business/premium | MVP | Growing Business Premium scope evaluation | Growing Business | Request a Proposal | /packages/growing-business | Growing Business + Premium record; approved services/add-ons |
+| /packages/growing-business-basic | MVP | Growing Business Basic scope evaluation | Growing Business | Request a Proposal | /packages/growing-business | Growing Business + Basic record; approved services/add-ons |
+| /packages/growing-business-standard | MVP | Growing Business Standard scope evaluation | Growing Business | Request a Proposal | /packages/growing-business | Growing Business + Standard record; approved services/add-ons |
+| /packages/growing-business-premium | MVP | Growing Business Premium scope evaluation | Growing Business | Request a Proposal | /packages/growing-business | Growing Business + Premium record; approved services/add-ons |
 | /packages/compare | MVP | Compare approved package scope | Startup and Growing Business | Request a Proposal | /packages | Same six records; segment-aware comparison; enterprise alternative |
 | /enterprise | MVP | Custom growth-stack evaluation | Enterprise decision makers | Request a Consultation | / | Custom service selection; industry/context relationships |
 | /industries | MVP | Industry solution discovery | Prospects seeking sector relevance | Request a Consultation | / | Published industry records linked to relevant services/packages |
-| /partnerships | MVP | Agency/strategic partnership enquiry | Agencies and prospective partners | Discuss a Partnership | / | Approved partnership enquiry type; service interests optional |
 | /consultation | MVP | Request guidance on business needs | Any prospect, including undecided visitors | Request a Consultation | / | Optional validated service/package/industry context |
-| /request-proposal | MVP | Request scoped proposal | Package, project, individual-service, enterprise prospects | Request a Proposal | / | Selected records/context; no purchase or contract |
+| /proposal | MVP | Request scoped proposal | Package, project, individual-service, enterprise prospects | Request a Proposal | / | Selected records/context; no purchase or contract |
 | /contact | MVP | General enquiry and project brief | All prospects and partners | Send a Project Brief | / | Enquiry type plus optional solution context |
 | /privacy | MVP | Understand disclosed data handling | Visitors and form users | Contact with a privacy question | / | Approved disclosure for forms/integrations; wording TBF |
 
@@ -72,7 +71,6 @@ The following register is the complete proposed route inventory for this documen
 | /case-studies/[slug] | Conditional/TBF | Evaluate a specific verified engagement | Relevant segment/industry prospects | Request a Consultation | /case-studies | Approved case and service/industry/package references where factual |
 | /insights | Conditional/TBF | Find useful educational content | Prospects researching problems | Explore Services | / | Approved articles related to services/industries |
 | /insights/[slug] | Conditional/TBF | Answer a distinct informational question | Relevant researching prospects | Request a Consultation | /insights | Article links to relevant published services/industries |
-| /digital-audit | Conditional/TBF | Evaluate an approved audit offer | Eligible prospects, eligibility TBF | Request an Audit, only if approved | / | Scope/terms/cost/receiving workflow TBF; no free claim |
 | /terms | Conditional/TBF | Understand approved website terms | Visitors | Contact with a terms question | / | Legal need and wording subject to approval |
 | /cookies | Conditional/TBF | Understand cookie/tracking behavior | Visitors | Review privacy information | / | Only if approved tracking/legal requirements warrant it |
 | /thank-you | Conditional/TBF | Submission acknowledgement; no search target | Visitors after verified receipt | Return to homepage | / | Optional noindex utility; inline confirmation is valid alternative |
@@ -106,28 +104,28 @@ All family names below are preserved exactly from the approved baseline. Slugs a
 | --- | --- | --- | --- | --- | --- |
 | Strategy & Consulting | /services/strategy-consulting | Conditional/TBF | Strategy and consulting support | Business decision makers | Request a Consultation; /services; approved services/packages/industries |
 | SEO | /services/seo | Conditional/TBF | Organic search service evaluation | Businesses seeking organic discovery | Request a Consultation; /services; approved services/packages/industries |
-| Local SEO / Google Business Profile | /services/local-seo-google-business-profile | Conditional/TBF | Local search and GBP support | Businesses with verified local needs | Request a Consultation; /services; approved services/packages/industries |
-| AI Search / AEO / GEO | /services/ai-search-aeo-geo | Conditional/TBF | AI search visibility support | Businesses evaluating AI search discovery | Request a Consultation; /services; approved services/packages/industries |
-| Authority / Digital PR | /services/authority-digital-pr | Conditional/TBF | Authority and digital PR services | Businesses evaluating authority-building work | Request a Consultation; /services; approved services/packages/industries |
-| Paid Advertising / PPC | /services/paid-advertising-ppc | Conditional/TBF | Paid advertising management | Businesses considering paid acquisition | Request a Consultation; /services; approved services/packages/industries |
-| Platform-specific advertising | /services/platform-advertising | Conditional/TBF | Channel-specific advertising support | Businesses evaluating an approved channel | Request a Consultation; /services; approved services/packages/industries |
-| Social Media Management | /services/social-media-management | Conditional/TBF | Social management services | Businesses seeking managed social activity | Request a Consultation; /services; approved services/packages/industries |
+| Local SEO | /services/local-seo | Conditional/TBF | Local search and GBP support | Businesses with verified local needs | Request a Consultation; /services; approved services/packages/industries |
+| AI Search Visibility | /services/ai-search-visibility | Conditional/TBF | AI search visibility support | Businesses evaluating AI search discovery | Request a Consultation; /services; approved services/packages/industries |
+| Authority & PR | /services/authority-pr | Conditional/TBF | Authority and digital PR services | Businesses evaluating authority-building work | Request a Consultation; /services; approved services/packages/industries |
+| Paid Advertising | /services/paid-advertising | Conditional/TBF | Paid advertising management | Businesses considering paid acquisition | Request a Consultation; /services; approved services/packages/industries |
+| Specialist Campaigns | /services/specialist-campaigns | Conditional/TBF | Channel-specific advertising support | Businesses evaluating an approved channel | Request a Consultation; /services; approved services/packages/industries |
+| Social Media | /services/social-media | Conditional/TBF | Social management services | Businesses seeking managed social activity | Request a Consultation; /services; approved services/packages/industries |
 | Content Marketing | /services/content-marketing | Conditional/TBF | Content marketing support | Businesses evaluating content programs | Request a Consultation; /services; approved services/packages/industries |
-| Branding & Graphic Design | /services/branding-graphic-design | Conditional/TBF | Brand and graphic design services | Businesses and project prospects | Request a Consultation; /services; approved services/packages/industries |
-| Video / Creative Production | /services/video-creative-production | Conditional/TBF | Video and creative production services | Businesses with creative/project needs | Request a Consultation; /services; approved services/packages/industries |
-| Website Design & Development | /services/website-design-development | Conditional/TBF | Website design/development evaluation | Businesses needing web projects | Request a Consultation; /services; approved services/packages/industries |
-| App / MVP Design & Development | /services/app-mvp-design-development | Conditional/TBF | App and MVP development evaluation | Businesses seeking product/project development | Request a Consultation; /services; approved services/packages/industries |
-| Website Care / Maintenance | /services/website-care-maintenance | Conditional/TBF | Website maintenance support | Businesses with existing websites | Request a Consultation; /services; approved services/packages/industries |
-| CRO | /services/cro | Conditional/TBF | Conversion optimization services | Businesses evaluating conversion improvement | Request a Consultation; /services; approved services/packages/industries |
-| Email / SMS Marketing | /services/email-sms-marketing | Conditional/TBF | Email/SMS marketing services | Businesses evaluating lifecycle marketing | Request a Consultation; /services; approved services/packages/industries |
-| CRM & Marketing Automation | /services/crm-marketing-automation | Conditional/TBF | CRM and marketing automation services | Businesses evaluating marketing operations | Request a Consultation; /services; approved services/packages/industries |
-| AI Automation | /services/ai-automation | Conditional/TBF | AI automation service evaluation | Businesses evaluating approved automation needs | Request a Consultation; /services; approved services/packages/industries |
-| B2B Marketing / Lead Generation | /services/b2b-marketing-lead-generation | Conditional/TBF | B2B marketing and lead support | B2B businesses | Request a Consultation; /services; approved services/packages/industries |
-| Analytics / Tracking / Reporting | /services/analytics-tracking-reporting | Conditional/TBF | Measurement and reporting services | Businesses evaluating measurement needs | Request a Consultation; /services; approved services/packages/industries |
-| Business Integrations | /services/business-integrations | Conditional/TBF | Business system integration support | Businesses evaluating integration projects | Request a Consultation; /services; approved services/packages/industries |
-| Enterprise Marketing / Growth Leadership | /services/enterprise-marketing-growth-leadership | Conditional/TBF | Enterprise growth leadership evaluation | Enterprise decision makers | Request a Consultation; /services; approved services/packages/industries |
+| Branding & Design | /services/branding-design | Conditional/TBF | Brand and graphic design services | Businesses and project prospects | Request a Consultation; /services; approved services/packages/industries |
+| Photo & Video | /services/photo-video | Conditional/TBF | Video and creative production services | Businesses with creative/project needs | Request a Consultation; /services; approved services/packages/industries |
+| Website Development | /services/website-development | Conditional/TBF | Website design/development evaluation | Businesses needing web projects | Request a Consultation; /services; approved services/packages/industries |
+| App / MVP Development | /services/app-mvp-development | Conditional/TBF | App and MVP development evaluation | Businesses seeking product/project development | Request a Consultation; /services; approved services/packages/industries |
+| Website Care | /services/website-care | Conditional/TBF | Website maintenance support | Businesses with existing websites | Request a Consultation; /services; approved services/packages/industries |
+| Conversion Optimization | /services/conversion-optimization | Conditional/TBF | Conversion optimization services | Businesses evaluating conversion improvement | Request a Consultation; /services; approved services/packages/industries |
+| Email & SMS | /services/email-sms | Conditional/TBF | Email/SMS marketing services | Businesses evaluating lifecycle marketing | Request a Consultation; /services; approved services/packages/industries |
+| CRM & Automation | /services/crm-automation | Conditional/TBF | CRM and marketing automation services | Businesses evaluating marketing operations | Request a Consultation; /services; approved services/packages/industries |
+| AI & Automation | /services/ai-automation | Conditional/TBF | AI automation service evaluation | Businesses evaluating approved automation needs | Request a Consultation; /services; approved services/packages/industries |
+| B2B Marketing | /services/b2b-marketing | Conditional/TBF | B2B marketing and lead support | B2B businesses | Request a Consultation; /services; approved services/packages/industries |
+| Analytics & Tracking | /services/analytics-tracking | Conditional/TBF | Measurement and reporting services | Businesses evaluating measurement needs | Request a Consultation; /services; approved services/packages/industries |
+| Business Technology & Integrations | /services/business-technology-integrations | Conditional/TBF | Business system integration support | Businesses evaluating integration projects | Request a Consultation; /services; approved services/packages/industries |
+| Enterprise Leadership | /services/enterprise-leadership | Conditional/TBF | Enterprise growth leadership evaluation | Enterprise decision makers | Request a Consultation; /services; approved services/packages/industries |
 
-Paid Advertising / PPC owns broad management intent. Platform-specific advertising owns channel selection intent; its potential children require distinct content, not a duplicate PPC page. SEO, local search, and AI search retain separate approved scope/intents. Enterprise Marketing / Growth Leadership explains that service family; `/enterprise` explains the custom buying journey and selection process.
+Paid Advertising owns broad management intent. Specialist Campaigns owns channel selection intent; its potential children require distinct content, not a duplicate PPC page. SEO, local search, and AI search retain separate approved scope/intents. Enterprise Leadership explains that service family; `/enterprise` explains the custom buying journey and selection process.
 
 ## 10. Individual service page architecture
 
@@ -161,7 +159,7 @@ Allow a visitor to request guidance without making selections. Preserve selected
 
 ## 15. Individual services / one-time projects architecture
 
-Visitors can enter through Services, a family/detail page, an industry relationship, or Contact. Send a Project Brief uses `/contact`; Request a Proposal uses `/request-proposal` with the relevant service and project-mode context. No recurring package is required.
+Visitors can enter through Services, a family/detail page, an industry relationship, or Contact. Send a Project Brief uses `/contact`; Request a Proposal uses `/proposal` with the relevant service and project-mode context. No recurring package is required.
 
 A standalone `/projects` collection is Conditional/TBF, justified only by distinct approved project offerings and useful discovery content. It should reference canonical services rather than duplicate their pages. One-time scoping, timing, and commercial terms stay TBF.
 
@@ -180,7 +178,7 @@ Use a shared Industries hub and distinct, approved sector pages. Each includes m
 | /industries/healthcare | Conditional/TBF | Healthcare solution evaluation | Healthcare businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
 | /industries/real-estate | Conditional/TBF | Real Estate solution evaluation | Real Estate businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
 | /industries/home-services | Conditional/TBF | Home Services solution evaluation | Home Services businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
-| /industries/ecommerce | Conditional/TBF | E-commerce solution evaluation | E-commerce businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
+| /industries/ecommerce | Conditional/TBF | Ecommerce solution evaluation | Ecommerce businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
 | /industries/saas-ai-technology | Conditional/TBF | SaaS / AI / Technology solution evaluation | SaaS / AI / Technology businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
 | /industries/restaurants-franchises | Conditional/TBF | Restaurants / Franchises solution evaluation | Restaurants / Franchises businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
 | /industries/legal | Conditional/TBF | Legal solution evaluation | Legal businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
@@ -188,8 +186,15 @@ Use a shared Industries hub and distinct, approved sector pages. Each includes m
 | /industries/finance | Conditional/TBF | Finance solution evaluation | Finance businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
 | /industries/automotive | Conditional/TBF | Automotive solution evaluation | Automotive businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
 | /industries/b2b-professional-services | Conditional/TBF | B2B / Professional Services solution evaluation | B2B / Professional Services businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
+| /industries/travel-hospitality | Conditional/TBF | Travel / Hospitality solution evaluation | Travel / Hospitality businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
+| /industries/beauty | Conditional/TBF | Beauty solution evaluation | Beauty businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
+| /industries/fitness | Conditional/TBF | Fitness solution evaluation | Fitness businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
+| /industries/fashion | Conditional/TBF | Fashion solution evaluation | Fashion businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
+| /industries/construction | Conditional/TBF | Construction solution evaluation | Construction businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
+| /industries/logistics | Conditional/TBF | Logistics solution evaluation | Logistics businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
+| /industries/recruitment | Conditional/TBF | Recruitment solution evaluation | Recruitment businesses | Request a Consultation | /industries | Approved industry-to-service/package references; no assumed inclusions |
 
-Serving E-commerce clients does not introduce purchasing into this website. Regulated-sector references do not establish compliance expertise, certifications, or approved policies.
+Serving Ecommerce clients does not introduce purchasing into this website. Regulated-sector references do not establish compliance expertise, certifications, or approved policies.
 
 ## 18. Industry-to-service relationship model
 
@@ -205,7 +210,7 @@ A family-level association does not include all its child services. Services may
 
 ## 20. Package-to-enquiry relationship model
 
-Selecting a tier leads to `/request-proposal` with stable package identity and visible segment/tier context. Carry approved optional service/add-on/industry selections as relevant; users can revise their interest before submitting.
+Selecting a tier leads to `/proposal` with stable package identity and visible segment/tier context. Carry approved optional service/add-on/industry selections as relevant; users can revise their interest before submitting.
 
 Future implementation validates IDs, allowed relationships, publication status, and input lengths server-side. URL/query context is untrusted and must contain no sensitive message/contact data. Context transport details are TBF; query variants are not new indexable pages. A submission does not reserve a package or establish a contract.
 
@@ -223,7 +228,7 @@ Availability, scheduling provider, meeting format, response commitments, and rou
 
 ## 23. Contact/enquiry architecture
 
-`/contact` supports general enquiries, individual-service/project briefs, and partnership enquiries. `/request-proposal` handles explicit scoping requests; `/consultation` handles guidance. These routes may share one form model and server workflow with purpose-specific copy and fields, avoiding separate incompatible lead stores.
+`/contact` supports general enquiries, individual-service/project briefs, and partnership enquiries. `/proposal` handles explicit scoping requests; `/consultation` handles guidance. These routes may share one form model and server workflow with purpose-specific copy and fields, avoiding separate incompatible lead stores.
 
 Receipt -> New -> Contacted -> Proposal Sent -> Won / Lost is the approved conceptual operational model. Assignment/notes are later scoped capabilities, not an admin-portal requirement. Provider, delivery addresses, persistence, required fields, consent, retention, duplicate handling, and thank-you implementation remain TBF. Never claim successful receipt without successful approved handling.
 
@@ -292,7 +297,7 @@ No city-by-service, industry-by-service, provider-by-service, or synonym route m
 | Level | Action | Destination / preserved context |
 | --- | --- | --- |
 | Primary guidance | Request a Consultation | /consultation; optional approved selection context |
-| Primary scoping | Request a Proposal | /request-proposal; package/service/enterprise context |
+| Primary scoping | Request a Proposal | /proposal; package/service/enterprise context |
 | Primary project | Send a Project Brief | /contact; project enquiry type and service context |
 | Specialized primary | Discuss a Partnership | /contact; partnership type |
 | Secondary discovery | Explore Services | /services and relevant published detail |

@@ -31,12 +31,12 @@ function draftRoute(identity: RouteIdentity, scope: RouteDefinition["scope"] = "
   });
 }
 const packageRoutes = packages.map((p) => draftRoute({
-  id: `route:package:${p.segment}:${p.tier}`, path: `/packages/${p.segment}/${p.slug}`,
+  id: `route:package:${p.segment}:${p.tier}`, path: `/packages/${p.slug}`,
   label: p.name, type: "package-tier", parentId: `route:packages:${p.segment}`,
   milestone: "M6", entity: { kind: "package", id: p.id },
 }));
 
-/** The exact 20 approved identities; architecture records, not filesystem pages. */
+/** The 19 fixed identities aligned to v3.0 doc 00 §5; architecture records, not filesystem pages. */
 export const fixedRoutes: readonly RouteDefinition[] = Object.freeze([
   draftRoute({ id: "route:home", path: "/", label: "Home", type: "home", parentId: null, milestone: "M5" }),
   draftRoute({ id: "route:about", path: "/about", label: "About", type: "company", parentId: "route:home", milestone: "M5" }),
@@ -49,9 +49,8 @@ export const fixedRoutes: readonly RouteDefinition[] = Object.freeze([
   draftRoute({ id: "route:packages:compare", path: "/packages/compare", label: "Compare Packages", type: "package-comparison", parentId: "route:packages", milestone: "M6" }),
   draftRoute({ id: "route:enterprise", path: "/enterprise", label: "Enterprise", type: "enterprise", parentId: "route:home", milestone: "M8", entity: { kind: "enterprise" } }),
   draftRoute({ id: "route:industries", path: "/industries", label: "Industries", type: "industries-hub", parentId: "route:home", milestone: "M7" }),
-  draftRoute({ id: "route:partnerships", path: "/partnerships", label: "Partnerships", type: "partnerships", parentId: "route:home", milestone: "M5 shell; M8 enquiry" }),
   draftRoute({ id: "route:consultation", path: "/consultation", label: "Request a Consultation", type: "conversion", parentId: "route:home", milestone: "M5 shell; M8 operational" }),
-  draftRoute({ id: "route:request-proposal", path: "/request-proposal", label: "Request a Proposal", type: "conversion", parentId: "route:home", milestone: "M5 shell; M8 operational" }),
+  draftRoute({ id: "route:proposal", path: "/proposal", label: "Request a Proposal", type: "conversion", parentId: "route:home", milestone: "M5 shell; M8 operational" }),
   draftRoute({ id: "route:contact", path: "/contact", label: "Contact", type: "conversion", parentId: "route:home", milestone: "M5 shell; M8 operational" }),
   draftRoute({ id: "route:privacy", path: "/privacy", label: "Privacy", type: "legal", parentId: "route:home", milestone: "M9" }),
 ]);
@@ -95,15 +94,14 @@ function contextValid(context: SelectionContext | undefined, data: RelationshipR
     && (!context.addOnIds || (data.addOns.state === "approved" && new Set(context.addOnIds).size === context.addOnIds.length && context.addOnIds.every((id) => data.addOns.state === "approved" && hasId(data.addOns.value, id))));
 }
 const conversionTargets = Object.freeze({
-  "request-consultation": "route:consultation", "request-proposal": "route:request-proposal",
-  "send-project-brief": "route:contact", "discuss-partnership": "route:contact", "request-audit": "route:digital-audit",
+  "request-consultation": "route:consultation", "request-proposal": "route:proposal",
+  "send-project-brief": "route:contact",
 });
 export function validateCTAReferences(cta: CTA, source = routes, data = relationshipRegistry): readonly RouteIssue[] {
   const issues: RouteIssue[] = [];
   if (cta.kind !== "submit-enquiry") {
     const target = getRouteById(cta.destination.routeId, source);
-    if (!target || (cta.kind === "enquiry-link" && target.id !== conversionTargets[cta.intent])
-      || (cta.kind === "enquiry-link" && cta.intent === "request-audit")) {
+    if (!target || (cta.kind === "enquiry-link" && target.id !== conversionTargets[cta.intent])) {
       issues.push(Object.freeze({ code: "invalid-cta", routeId: cta.destination.routeId }));
     }
     if (cta.kind === "enquiry-link" && !contextValid(cta.context, data)) issues.push(Object.freeze({ code: "invalid-context", routeId: cta.destination.routeId }));
@@ -121,7 +119,7 @@ function routeReady(r: RouteDefinition): boolean {
 }
 function entityPublic(entity: SolutionReference | RouteEntity, data: RelationshipRegistry): boolean {
   const record = entityRecord(entity, data);
-  return record?.publication.status === "published" && !("availability" in record && (record.availability === "tbf" || record.availability === "unavailable"));
+  return record?.publication.status === "published" && !("availability" in record && (record.availability === "tbf" || record.availability === "coming-soon" || record.availability === "unavailable"));
 }
 export function isPublicCTAContext(cta: CTA, data = relationshipRegistry): boolean {
   if (cta.kind !== "enquiry-link" || !cta.context) return true;

@@ -1,6 +1,7 @@
 import type {
   Decision,
   Industry,
+  IndustryPriorityBand,
   IndustryPackageRelationship,
   IndustryServiceRelationship,
 } from "@/lib/domain";
@@ -16,7 +17,7 @@ const draftIndustryFields = {
 } as const;
 
 /** Syntax validation does not grant publication or approve any relationship. */
-function draftIndustry(rawSlug: string, name: string): Industry {
+function draftIndustry(rawSlug: string, name: string, priorityBand: IndustryPriorityBand): Industry {
   const slug = parseSlug(rawSlug);
   if (slug === null) throw new Error(`Invalid industry inventory slug: ${rawSlug}`);
   return Object.freeze({
@@ -24,25 +25,34 @@ function draftIndustry(rawSlug: string, name: string): Industry {
     id: `industry:${slug}`,
     slug,
     name,
+    priorityBand,
   });
 }
 
 /**
- * Canonical candidates in requirements v3.0 §6 order.
- * Slugs preserve M4.1 §17 / M4.2 §38; these are not public pages.
+ * Canonical candidates in v3.0 doc 04 §3 order: launch priority, then secondary.
+ * Long-tail niches are deliberately absent: they must not be mass-published as thin pages.
+ * These are not public pages.
  */
 export const industries: readonly Industry[] = Object.freeze([
-  draftIndustry("healthcare", "Healthcare"),
-  draftIndustry("real-estate", "Real Estate"),
-  draftIndustry("home-services", "Home Services"),
-  draftIndustry("ecommerce", "E-commerce"),
-  draftIndustry("saas-ai-technology", "SaaS / AI / Technology"),
-  draftIndustry("restaurants-franchises", "Restaurants / Franchises"),
-  draftIndustry("legal", "Legal"),
-  draftIndustry("education", "Education"),
-  draftIndustry("finance", "Finance"),
-  draftIndustry("automotive", "Automotive"),
-  draftIndustry("b2b-professional-services", "B2B / Professional Services"),
+  draftIndustry("healthcare", "Healthcare", "launch"),
+  draftIndustry("real-estate", "Real Estate", "launch"),
+  draftIndustry("home-services", "Home Services", "launch"),
+  draftIndustry("ecommerce", "Ecommerce", "launch"),
+  draftIndustry("saas-ai-technology", "SaaS / AI / Technology", "launch"),
+  draftIndustry("restaurants-franchises", "Restaurants / Franchises", "launch"),
+  draftIndustry("legal", "Legal", "launch"),
+  draftIndustry("education", "Education", "launch"),
+  draftIndustry("finance", "Finance", "launch"),
+  draftIndustry("automotive", "Automotive", "launch"),
+  draftIndustry("b2b-professional-services", "B2B / Professional Services", "secondary"),
+  draftIndustry("travel-hospitality", "Travel / Hospitality", "secondary"),
+  draftIndustry("beauty", "Beauty", "secondary"),
+  draftIndustry("fitness", "Fitness", "secondary"),
+  draftIndustry("fashion", "Fashion", "secondary"),
+  draftIndustry("construction", "Construction", "secondary"),
+  draftIndustry("logistics", "Logistics", "secondary"),
+  draftIndustry("recruitment", "Recruitment", "secondary"),
 ]);
 
 /** Unknown mappings are not approved empty lists or implicit all-to-all relevance. */

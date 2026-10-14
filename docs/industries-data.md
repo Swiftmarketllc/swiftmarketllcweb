@@ -23,7 +23,7 @@ Every record is **draft**. Candidate paths below document conditional architectu
 | Healthcare | industry:healthcare | healthcare | /industries/healthcare |
 | Real Estate | industry:real-estate | real-estate | /industries/real-estate |
 | Home Services | industry:home-services | home-services | /industries/home-services |
-| E-commerce | industry:ecommerce | ecommerce | /industries/ecommerce |
+| Ecommerce | industry:ecommerce | ecommerce | /industries/ecommerce |
 | SaaS / AI / Technology | industry:saas-ai-technology | saas-ai-technology | /industries/saas-ai-technology |
 | Restaurants / Franchises | industry:restaurants-franchises | restaurants-franchises | /industries/restaurants-franchises |
 | Legal | industry:legal | legal | /industries/legal |
@@ -32,7 +32,7 @@ Every record is **draft**. Candidate paths below document conditional architectu
 | Automotive | industry:automotive | automotive | /industries/automotive |
 | B2B / Professional Services | industry:b2b-professional-services | b2b-professional-services | /industries/b2b-professional-services |
 
-The candidate count is inventory, not a launch-page commitment or evidence of sector experience. Additional industries require approved identity/content and shared data updates. Regulated-sector names imply no compliance expertise or credentials. E-commerce remains a client industry; this website remains enquiry/proposal-first.
+The candidate count is inventory, not a launch-page commitment or evidence of sector experience. Additional industries require approved identity/content and shared data updates. Regulated-sector names imply no compliance expertise or credentials. Ecommerce remains a client industry; this website remains enquiry/proposal-first.
 
 ## TBF content and relationships
 

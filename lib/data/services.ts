@@ -51,41 +51,41 @@ const familyRecords = {
     slug: "seo",
     name: "SEO",
   },
-  "local-seo-google-business-profile": {
+  "local-seo": {
     ...draftFamilyFields,
-    id: "family:local-seo-google-business-profile",
-    slug: "local-seo-google-business-profile",
-    name: "Local SEO / Google Business Profile",
+    id: "family:local-seo",
+    slug: "local-seo",
+    name: "Local SEO",
   },
-  "ai-search-aeo-geo": {
+  "ai-search-visibility": {
     ...draftFamilyFields,
-    id: "family:ai-search-aeo-geo",
-    slug: "ai-search-aeo-geo",
-    name: "AI Search / AEO / GEO",
+    id: "family:ai-search-visibility",
+    slug: "ai-search-visibility",
+    name: "AI Search Visibility",
   },
-  "authority-digital-pr": {
+  "authority-pr": {
     ...draftFamilyFields,
-    id: "family:authority-digital-pr",
-    slug: "authority-digital-pr",
-    name: "Authority / Digital PR",
+    id: "family:authority-pr",
+    slug: "authority-pr",
+    name: "Authority & PR",
   },
-  "paid-advertising-ppc": {
+  "paid-advertising": {
     ...draftFamilyFields,
-    id: "family:paid-advertising-ppc",
-    slug: "paid-advertising-ppc",
-    name: "Paid Advertising / PPC",
+    id: "family:paid-advertising",
+    slug: "paid-advertising",
+    name: "Paid Advertising",
   },
-  "platform-advertising": {
+  "specialist-campaigns": {
     ...draftFamilyFields,
-    id: "family:platform-advertising",
-    slug: "platform-advertising",
-    name: "Platform-specific advertising",
+    id: "family:specialist-campaigns",
+    slug: "specialist-campaigns",
+    name: "Specialist Campaigns",
   },
-  "social-media-management": {
+  "social-media": {
     ...draftFamilyFields,
-    id: "family:social-media-management",
-    slug: "social-media-management",
-    name: "Social Media Management",
+    id: "family:social-media",
+    slug: "social-media",
+    name: "Social Media",
   },
   "content-marketing": {
     ...draftFamilyFields,
@@ -93,83 +93,83 @@ const familyRecords = {
     slug: "content-marketing",
     name: "Content Marketing",
   },
-  "branding-graphic-design": {
+  "branding-design": {
     ...draftFamilyFields,
-    id: "family:branding-graphic-design",
-    slug: "branding-graphic-design",
-    name: "Branding & Graphic Design",
+    id: "family:branding-design",
+    slug: "branding-design",
+    name: "Branding & Design",
   },
-  "video-creative-production": {
+  "photo-video": {
     ...draftFamilyFields,
-    id: "family:video-creative-production",
-    slug: "video-creative-production",
-    name: "Video / Creative Production",
+    id: "family:photo-video",
+    slug: "photo-video",
+    name: "Photo & Video",
   },
-  "website-design-development": {
+  "website-development": {
     ...draftFamilyFields,
-    id: "family:website-design-development",
-    slug: "website-design-development",
-    name: "Website Design & Development",
+    id: "family:website-development",
+    slug: "website-development",
+    name: "Website Development",
   },
-  "app-mvp-design-development": {
+  "app-mvp-development": {
     ...draftFamilyFields,
-    id: "family:app-mvp-design-development",
-    slug: "app-mvp-design-development",
-    name: "App / MVP Design & Development",
+    id: "family:app-mvp-development",
+    slug: "app-mvp-development",
+    name: "App / MVP Development",
   },
-  "website-care-maintenance": {
+  "website-care": {
     ...draftFamilyFields,
-    id: "family:website-care-maintenance",
-    slug: "website-care-maintenance",
-    name: "Website Care / Maintenance",
+    id: "family:website-care",
+    slug: "website-care",
+    name: "Website Care",
   },
-  "cro": {
+  "conversion-optimization": {
     ...draftFamilyFields,
-    id: "family:cro",
-    slug: "cro",
-    name: "CRO",
+    id: "family:conversion-optimization",
+    slug: "conversion-optimization",
+    name: "Conversion Optimization",
   },
-  "email-sms-marketing": {
+  "email-sms": {
     ...draftFamilyFields,
-    id: "family:email-sms-marketing",
-    slug: "email-sms-marketing",
-    name: "Email / SMS Marketing",
+    id: "family:email-sms",
+    slug: "email-sms",
+    name: "Email & SMS",
   },
-  "crm-marketing-automation": {
+  "crm-automation": {
     ...draftFamilyFields,
-    id: "family:crm-marketing-automation",
-    slug: "crm-marketing-automation",
-    name: "CRM & Marketing Automation",
+    id: "family:crm-automation",
+    slug: "crm-automation",
+    name: "CRM & Automation",
   },
   "ai-automation": {
     ...draftFamilyFields,
     id: "family:ai-automation",
     slug: "ai-automation",
-    name: "AI Automation",
+    name: "AI & Automation",
   },
-  "b2b-marketing-lead-generation": {
+  "b2b-marketing": {
     ...draftFamilyFields,
-    id: "family:b2b-marketing-lead-generation",
-    slug: "b2b-marketing-lead-generation",
-    name: "B2B Marketing / Lead Generation",
+    id: "family:b2b-marketing",
+    slug: "b2b-marketing",
+    name: "B2B Marketing",
   },
-  "analytics-tracking-reporting": {
+  "analytics-tracking": {
     ...draftFamilyFields,
-    id: "family:analytics-tracking-reporting",
-    slug: "analytics-tracking-reporting",
-    name: "Analytics / Tracking / Reporting",
+    id: "family:analytics-tracking",
+    slug: "analytics-tracking",
+    name: "Analytics & Tracking",
   },
-  "business-integrations": {
+  "business-technology-integrations": {
     ...draftFamilyFields,
-    id: "family:business-integrations",
-    slug: "business-integrations",
-    name: "Business Integrations",
+    id: "family:business-technology-integrations",
+    slug: "business-technology-integrations",
+    name: "Business Technology & Integrations",
   },
-  "enterprise-marketing-growth-leadership": {
+  "enterprise-leadership": {
     ...draftFamilyFields,
-    id: "family:enterprise-marketing-growth-leadership",
-    slug: "enterprise-marketing-growth-leadership",
-    name: "Enterprise Marketing / Growth Leadership",
+    id: "family:enterprise-leadership",
+    slug: "enterprise-leadership",
+    name: "Enterprise Leadership",
   },
 } as const satisfies {
   readonly [S in ServiceFamilySlug]: Extract<ServiceFamily, { slug: S }>;

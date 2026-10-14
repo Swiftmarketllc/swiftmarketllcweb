@@ -55,7 +55,7 @@ export type RelationshipLookup<T> = Tbf
 type PublishedRecord = Readonly<{ publication: Publication; availability?: string }>;
 function isPublic(record: PublishedRecord | undefined): boolean {
   return record?.publication.status === "published"
-    && record.availability !== "tbf" && record.availability !== "unavailable";
+    && record.availability !== "tbf" && record.availability !== "coming-soon" && record.availability !== "unavailable";
 }
 function values<T>(decision: Decision<readonly T[]>): readonly T[] {
   return decision.state === "approved" ? decision.value : [];
@@ -128,9 +128,25 @@ export function validateRelationshipRegistry(
   }
   registry.packages.forEach((p, index) => {
     if (!isPackageSegment(p.segment) || !isPackageTier(p.tier)
-      || p.id !== `package:${p.segment}:${p.tier}` || p.slug !== p.tier) {
+      || p.id !== `package:${p.segment}:${p.tier}` || p.slug !== `${p.segment}-${p.tier}`) {
       issue("invalid-identity", `packages[${index}]`);
     }
+    if (!Number.isInteger(p.version.number) || p.version.number < 1
+      || (p.version.status === "approved" && !p.version.approvalReference.trim())) {
+      issue("invalid-identity", `packages[${index}].version`);
+    }
+    // A published package must pin an approved version so later edits cannot rewrite client scope.
+    if (p.publication.status === "published" && p.version.status !== "approved") {
+      issue("incomplete-publication", `packages[${index}].version`);
+    }
+    unique(p.capabilities.map((row) => row.id), "duplicate-identity", `packages[${index}].capabilities`);
+    p.capabilities.forEach((row, rowIndex) => {
+      if (!/^capability:[a-z0-9]+(?:-[a-z0-9]+)*$/.test(row.id) || !row.label.trim()) {
+        issue("invalid-identity", `packages[${index}].capabilities[${rowIndex}]`);
+      }
+      values(row.services).forEach((id, serviceIndex) =>
+        reference(registry.services, id, `packages[${index}].capabilities[${rowIndex}].services[${serviceIndex}]`));
+    });
   });
   registry.services.forEach((service, index) => {
     reference(registry.families, service.familyId, `services[${index}].familyId`);

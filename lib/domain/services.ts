@@ -63,10 +63,14 @@ export type Service = Readonly<{
   relatedServiceIds: Decision<readonly ServiceId[]>;
 }>;
 
+/** Doc 04 §3 priority bands. Long-tail niches are intentionally not registered. */
+export type IndustryPriorityBand = "launch" | "secondary";
+
 export type Industry = Readonly<{
   id: IndustryId;
   slug: Slug;
   name: string;
+  priorityBand: IndustryPriorityBand;
   publication: Publication;
   routeId?: RouteId;
   description: Decision<string>;

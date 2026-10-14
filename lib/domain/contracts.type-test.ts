@@ -1,5 +1,6 @@
 /** Compile-only regression contracts: no runtime fixtures or production content. */
 import type {
+  Availability,
   PackageId,
   PackageSegment,
   PackageSelection,
@@ -8,7 +9,7 @@ import type {
   IndustryId,
 } from "./core";
 import type { Pricing } from "./commercial";
-import type { PackageCatalog, EnterpriseOffering } from "./offers";
+import type { PackageCatalog, EnterpriseOffering, CapabilityMatrix } from "./offers";
 import type { ConversionCTA, Indexability } from "./routes";
 import type { Proof } from "./content";
 
@@ -36,7 +37,12 @@ export type DomainTypeContracts = readonly [
   Expect<Equal<"amount" extends keyof Extract<Pricing, { state: "tbf" }> ? true : false, false>>,
   Expect<Equal<"amount" extends keyof Extract<Pricing, { state: "custom-quote" }> ? true : false, false>>,
   Expect<Equal<Extract<Indexability, { index: false }>["sitemap"], false>>,
-  Expect<Equal<Extract<ConversionCTA, { intent: "discuss-partnership" }>["destination"]["routeId"], "route:contact">>,
-  Expect<Equal<Extract<ConversionCTA, { intent: "request-proposal" }>["destination"]["routeId"], "route:request-proposal">>,
+  Expect<Equal<Extract<ConversionCTA, { intent: "send-project-brief" }>["destination"]["routeId"], "route:contact">>,
+  Expect<Reject<Extract<ConversionCTA, { intent: "discuss-partnership" | "request-audit" }>>>,
+  Expect<Equal<PackageCatalog["startup"]["basic"]["version"]["number"], number>>,
+  Expect<Equal<PackageCatalog["growing-business"]["premium"]["capabilities"], CapabilityMatrix>>,
+  Expect<Equal<Availability extends "coming-soon" ? true : false, false>>,
+  Expect<Equal<Extract<Availability, "coming-soon">, "coming-soon">>,
+  Expect<Equal<Extract<ConversionCTA, { intent: "request-proposal" }>["destination"]["routeId"], "route:proposal">>,
   Expect<Equal<Extract<Proof, { publication: { status: "published" } }>["verification"]["status"], "verified">>
 ];

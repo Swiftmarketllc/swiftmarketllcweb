@@ -2,26 +2,26 @@
 export type ServiceFamilySlug =
   | "strategy-consulting"
   | "seo"
-  | "local-seo-google-business-profile"
-  | "ai-search-aeo-geo"
-  | "authority-digital-pr"
-  | "paid-advertising-ppc"
-  | "platform-advertising"
-  | "social-media-management"
+  | "local-seo"
+  | "ai-search-visibility"
+  | "authority-pr"
+  | "paid-advertising"
+  | "specialist-campaigns"
+  | "social-media"
   | "content-marketing"
-  | "branding-graphic-design"
-  | "video-creative-production"
-  | "website-design-development"
-  | "app-mvp-design-development"
-  | "website-care-maintenance"
-  | "cro"
-  | "email-sms-marketing"
-  | "crm-marketing-automation"
+  | "branding-design"
+  | "photo-video"
+  | "website-development"
+  | "app-mvp-development"
+  | "website-care"
+  | "conversion-optimization"
+  | "email-sms"
+  | "crm-automation"
   | "ai-automation"
-  | "b2b-marketing-lead-generation"
-  | "analytics-tracking-reporting"
-  | "business-integrations"
-  | "enterprise-marketing-growth-leadership";
+  | "b2b-marketing"
+  | "analytics-tracking"
+  | "business-technology-integrations"
+  | "enterprise-leadership";
 
 export type ServiceFamilyId = `family:${ServiceFamilySlug}`;
 export type ServiceId = `service:${string}`;
@@ -31,10 +31,8 @@ export type AddOnId = `add-on:${string}`;
 export type RouteId = `route:${string}`;
 export type ContentId = `content:${string}`;
 export type ProofId = `proof:${string}`;
-export type PartnershipId = `partnership:${string}`;
 export type EnquiryId = `enquiry:${string}`;
 export type LeadId = `lead:${string}`;
-export type AuditOfferId = `audit-offer:${string}`;
 
 export type PackageSegment = "startup" | "growing-business";
 export type BusinessSegment = PackageSegment | "enterprise";
@@ -68,6 +66,7 @@ export type Availability =
   | "tbf"
   | "available"
   | "consultation-required"
+  | "coming-soon"
   | "unavailable";
 
 export type Publication =

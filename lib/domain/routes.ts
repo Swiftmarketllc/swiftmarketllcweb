@@ -1,5 +1,4 @@
 import type {
-  AuditOfferId,
   ContentId,
   Decision,
   Publication,
@@ -13,16 +12,12 @@ import type {
 export type ConversionIntent =
   | "request-consultation"
   | "request-proposal"
-  | "send-project-brief"
-  | "discuss-partnership"
-  | "request-audit";
+  | "send-project-brief";
 
 type ConversionRoutes = {
   "request-consultation": "route:consultation";
-  "request-proposal": "route:request-proposal";
+  "request-proposal": "route:proposal";
   "send-project-brief": "route:contact";
-  "discuss-partnership": "route:contact";
-  "request-audit": "route:digital-audit";
 };
 
 export type ConversionCTA = {
@@ -32,9 +27,7 @@ export type ConversionCTA = {
     label: string;
     destination: Readonly<{ routeId: ConversionRoutes[I] }>;
     context?: SelectionContext;
-  }> & (I extends "request-audit"
-    ? Readonly<{ approvedOfferId: AuditOfferId }>
-    : Readonly<{ approvedOfferId?: never }>);
+  }>;
 }[ConversionIntent];
 
 export type CTA =
@@ -75,7 +68,6 @@ export type RouteType =
   | "enterprise"
   | "industries-hub"
   | "industry"
-  | "partnerships"
   | "conversion"
   | "projects-hub"
   | "add-ons-hub"

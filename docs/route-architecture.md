@@ -49,7 +49,7 @@ These are verified conventions, not implemented changes. No Pages Router, synchr
 | Enterprise | /enterprise | Custom Build Your Growth Stack and consultation |
 | Industry relevance | /industries | Hub and selected substantive sector details |
 | Partnerships | /partnerships | Agency/strategic partnership discussion |
-| Conversion | /consultation, /request-proposal, /contact | Different entry intents sharing one enquiry model |
+| Conversion | /consultation, /proposal, /contact | Different entry intents sharing one enquiry model |
 | Projects/add-ons | /projects, /add-ons, if justified | Optional discovery; normally referenced within solution pages |
 | Proof/resources | /case-studies, /insights, if approved | Verified work and approved educational content |
 | Legal | /privacy; conditional /terms, /cookies | Approved factual disclosures |
@@ -168,7 +168,7 @@ app/
     [industrySlug]/page.tsx
   partnerships/page.tsx
   consultation/page.tsx
-  request-proposal/page.tsx
+  proposal/page.tsx
   contact/page.tsx
   privacy/page.tsx
   projects/page.tsx               conditional
@@ -217,7 +217,7 @@ Prefer approved repository data initially; no CMS or remote API is selected. Gen
 
 /services is the capability directory. /services/[familySlug] owns family-level intent. /services/[familySlug]/[serviceSlug] is permitted only for a distinct approved individual service with enough content; resolve both IDs and verify that the child belongs to the requested parent.
 
-Preserve the exact 22 approved names and proposed M4.1 slugs listed in Section 38. Overlapping families need editorial boundaries: broad PPC versus platform-specific advertising, CRM/marketing automation versus AI Automation, and AI Search versus general SEO must have differentiated content. A platform service can be a selective child rather than another duplicate family.
+Preserve the exact 22 approved names and proposed M4.1 slugs listed in Section 38. Overlapping families need editorial boundaries: broad PPC versus platform-specific advertising, CRM/marketing automation versus AI & Automation, and AI Search versus general SEO must have differentiated content. A platform service can be a selective child rather than another duplicate family.
 
 Link each published family to verified services, appropriate industries, compatible package scope, custom Enterprise, and consultation. An individual service points to proposal with its validated reference. Relationship links never imply that an unapproved service is included in a package.
 
@@ -229,19 +229,19 @@ Retain M4.1's two segment hubs and **six individual tier routes**, plus /package
 
 This choice preserves approved M4.1 navigation/count, enables direct links and context-preserving enquiries, and keeps maintenance controlled through two allowlisted dynamic segments and one shared tier presentation. Six URL identities do not mean six handwritten implementations.
 
-Publication requires unique approved scope content; no repetitive thin tier pages or invented numbers to fill a template. If future approved content cannot support separate details, request an explicit M4.1/M4.2 route-consolidation decision; do not silently switch to anchors or change the 20-core count. Prices, quantities, fees, billing/commitment terms and delivery policies remain TBF. Selection goes to /request-proposal, never checkout.
+Publication requires unique approved scope content; no repetitive thin tier pages or invented numbers to fill a template. If future approved content cannot support separate details, request an explicit M4.1/M4.2 route-consolidation decision; do not silently switch to anchors or change the 20-core count. Prices, quantities, fees, billing/commitment terms and delivery policies remain TBF. Selection goes to /proposal, never checkout.
 
 ## 13. Enterprise route architecture
 
 /enterprise is the custom engagement destination, with Build Your Growth Stack / custom service selection and consultation-led scoping. It may reference several approved service IDs, industry context, and project goals without producing a purchasable configuration or automatic quote.
 
-Its primary CTA is /consultation; a defined brief may use /request-proposal. Do not add /enterprise/basic, /enterprise/standard, /enterprise/premium, configurator result URLs, or cart paths. The Enterprise Marketing / Growth Leadership family page describes a capability; /enterprise describes the custom engagement journey. Publish both only with clearly different intent and cross-links.
+Its primary CTA is /consultation; a defined brief may use /proposal. Do not add /enterprise/basic, /enterprise/standard, /enterprise/premium, configurator result URLs, or cart paths. The Enterprise Leadership family page describes a capability; /enterprise describes the custom engagement journey. Publish both only with clearly different intent and cross-links.
 
 ## 14. Individual services/projects architecture
 
 One approved service identity can support recurring, standalone, or one-time work. Use a unique child detail only when warranted; otherwise present the individual offering within the family page and pass the service ID to enquiry.
 
-One-time project enquiries go to /contact for a project brief or /request-proposal for defined scope. Conditional /projects is an aggregate discovery page only if it contributes distinct approved value; it is not a second copy of website/app/creative services. Do not confuse project offerings with proof: verified completed engagements belong to conditional Case Studies.
+One-time project enquiries go to /contact for a project brief or /proposal for defined scope. Conditional /projects is an aggregate discovery page only if it contributes distinct approved value; it is not a second copy of website/app/creative services. Do not confuse project offerings with proof: verified completed engagements belong to conditional Case Studies.
 
 ## 15. Add-ons architecture
 
@@ -255,7 +255,7 @@ Conditional /add-ons becomes public only with sufficient distinct discovery cont
 
 Each published page needs sector-specific problems, relevant approved services, appropriate package/custom paths, useful explanatory content, and verified proof only if supplied. Link back to Industries and to published service detail URLs, rather than creating service-by-industry permutations. New sectors require the same publication gate and stable records.
 
-No auto-generated city/sector keyword matrices, interchangeable industry paragraphs, unverified regulated-sector expertise, or duplicate /services/.../industries/... URLs. E-commerce client support does not authorize website checkout.
+No auto-generated city/sector keyword matrices, interchangeable industry paragraphs, unverified regulated-sector expertise, or duplicate /services/.../industries/... URLs. Ecommerce client support does not authorize website checkout.
 
 ## 17. Resources/content route model
 
@@ -269,7 +269,7 @@ If pagination becomes necessary, recommend an allowlisted positive page query on
 
 Use one underlying enquiry model with different entry intents: general/project brief, consultation, scoped proposal, package interest, individual service, custom Enterprise, partnership, and optional approved audit. Model entry route/source separately from enquiry type and optional entity references.
 
-Contact uses /contact; consultation uses /consultation; package and defined service/project proposal uses /request-proposal; Enterprise primarily uses consultation with custom context; partnership uses /contact with partnership context. An approved audit uses /digital-audit and the same lead pipeline. No separate endpoint or duplicated form model per package/service is needed.
+Contact uses /contact; consultation uses /consultation; package and defined service/project proposal uses /proposal; Enterprise primarily uses consultation with custom context; partnership uses /contact with partnership context. An approved audit uses /digital-audit and the same lead pipeline. No separate endpoint or duplicated form model per package/service is needed.
 
 Transport allowlisted IDs through optional query state or an accessible form selection, with server validation and graceful recovery if a record is missing/stale. No names, emails, messages, budgets, credentials, or other sensitive data in URLs. Do not accept client-supplied prices or arbitrary return URLs as authoritative. Success means verified receiving-system acceptance according to the eventual design; a click, attempted send, or /thank-you visit is not evidence of receipt.
 
@@ -280,8 +280,8 @@ Transport allowlisted IDs through optional query state or an accessible form sel
 | Brand/general guidance: Request a Consultation | /consultation | Source route; optional approved service/industry ID |
 | Compare Packages | /packages/compare | Optional known segment |
 | Explore Startup / Growing packages | /packages/startup or /packages/growing-business | None required |
-| Request a Proposal from a tier | /request-proposal | Package ID resolving segment + one approved tier |
-| Defined individual service / add-on | /request-proposal | Service ID; compatible add-on IDs |
+| Request a Proposal from a tier | /proposal | Package ID resolving segment + one approved tier |
+| Defined individual service / add-on | /proposal | Service ID; compatible add-on IDs |
 | Send a Project Brief | /contact | Project enquiry type; optional service references |
 | Build Your Growth Stack / Enterprise consultation | /consultation | Enterprise intent; selected approved service IDs |
 | Discuss a Partnership | /contact | Partnership enquiry type |
@@ -439,7 +439,7 @@ Contextual related links may be reciprocal, but the parent hierarchy and navigat
 
 ## 36. MVP route manifest
 
-**Exactly 20 fixed core routes**, identical to M4.1. I = proposed index/follow after approved production publication; N = proposed noindex/follow utility. Sitemap Yes is conditional on publication, indexability and verified origin; nothing is currently generated. Primary CTA text on conversion pages describes the future submit action.
+**Exactly 19 fixed core routes**, aligned to v3.0 doc 00 §5. I = proposed index/follow after approved production publication; N = proposed noindex/follow utility. Sitemap Yes is conditional on publication, indexability and verified origin; nothing is currently generated. Primary CTA text on conversion pages describes the future submit action.
 
 | Route | Route type | Parent | Audience | Search intent | Indexability | Sitemap inclusion | Primary CTA | Data source planned | Implementation milestone |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -448,23 +448,22 @@ Contextual related links may be reciprocal, but the parent hierarchy and navigat
 | /services | Services hub | / | All business segments; individual-service prospects | Capability discovery | I | Yes | Request a Consultation | Service families/services | M6 |
 | /packages | Package hub | / | Startup and Growing Business prospects | Recurring solution evaluation | I | Yes | Compare Packages | Six package records + segment content | M6 |
 | /packages/startup | Package hub | /packages | Startup Business | Startup package evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
-| /packages/startup/basic | Package tier | /packages/startup | Startup Business | Startup Basic scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
-| /packages/startup/standard | Package tier | /packages/startup | Startup Business | Startup Standard scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
-| /packages/startup/premium | Package tier | /packages/startup | Startup Business | Startup Premium scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
+| /packages/startup-basic | Package tier | /packages/startup | Startup Business | Startup Basic scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
+| /packages/startup-standard | Package tier | /packages/startup | Startup Business | Startup Standard scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
+| /packages/startup-premium | Package tier | /packages/startup | Startup Business | Startup Premium scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
 | /packages/growing-business | Package hub | /packages | Growing Business | Growing Business package evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
-| /packages/growing-business/basic | Package tier | /packages/growing-business | Growing Business | Growing Business Basic scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
-| /packages/growing-business/standard | Package tier | /packages/growing-business | Growing Business | Growing Business Standard scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
-| /packages/growing-business/premium | Package tier | /packages/growing-business | Growing Business | Growing Business Premium scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
+| /packages/growing-business-basic | Package tier | /packages/growing-business | Growing Business | Growing Business Basic scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
+| /packages/growing-business-standard | Package tier | /packages/growing-business | Growing Business | Growing Business Standard scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
+| /packages/growing-business-premium | Package tier | /packages/growing-business | Growing Business | Growing Business Premium scope evaluation | I | Yes | Request a Proposal | Six package records + segment content | M6 |
 | /packages/compare | Comparison | /packages | Startup and Growing Business | Compare approved package scope | I | Yes | Request a Proposal | Six package records + segment content | M6 |
 | /enterprise | Custom enterprise | / | Enterprise decision makers | Custom growth-stack evaluation | I | Yes | Request a Consultation | Enterprise content + service references | M8 |
 | /industries | Industry hub | / | Prospects seeking sector relevance | Industry solution discovery | I | Yes | Request a Consultation | Industries + relationship records | M7 |
-| /partnerships | Partnership | / | Agencies and prospective partners | Agency/strategic partnership enquiry | I | Yes | Discuss a Partnership | Approved partnership content/enquiry type | M5 shell; M8 enquiry |
 | /consultation | Conversion | / | Any prospect, including undecided visitors | Request guidance on business needs | N | No | Request a Consultation | Enquiry definitions + validated references | M5 shell; M8 operational |
-| /request-proposal | Conversion | / | Package, project, individual-service, enterprise prospects | Request scoped proposal | N | No | Request a Proposal | Enquiry definitions + validated references | M5 shell; M8 operational |
+| /proposal | Conversion | / | Package, project, individual-service, enterprise prospects | Request scoped proposal | N | No | Request a Proposal | Enquiry definitions + validated references | M5 shell; M8 operational |
 | /contact | Conversion | / | All prospects and partners | General enquiry and project brief | I | Yes | Send a Project Brief | Enquiry definitions + validated references | M5 shell; M8 operational |
 | /privacy | Legal | / | Visitors and form users | Understand disclosed data handling | I | Yes | Contact with a privacy question | Approved disclosure content | M8 draft inputs; M9 approved |
 
-Count reconciliation: 1 Home + 1 About + 1 Services hub + 10 package routes (1 overall hub, 2 segment hubs, 6 tiers, 1 comparison) + 1 Enterprise + 1 Industries hub + 1 Partnerships + 3 conversions + 1 Privacy = **20**. Dynamic tier templates resolve six concrete routes, not two additional pages.
+Count reconciliation: 1 Home + 1 About + 1 Services hub + 10 package routes (1 overall hub, 2 segment hubs, 6 tiers, 1 comparison) + 1 Enterprise + 1 Industries hub + 3 conversions + 1 Privacy = **19**. Dynamic tier templates resolve six concrete routes, not two additional pages.
 
 No M4.1 path/count discrepancy is introduced. Utility indexing choices, allowlisted tier implementation and publication controls refine architecture without changing that inventory. Exact milestone scheduling for company/partnership/legal content can be confirmed during implementation; all public lead collection requires operational handling and approved disclosure, regardless of when its shell is built.
 
@@ -488,28 +487,28 @@ Each has route type Service family, primary CTA Request a Consultation → /cons
 | --- | --- | --- | --- | --- | --- |
 | /services/strategy-consulting | Strategy & Consulting | Strategy and consulting support; Business decision makers | /services | Families/services + verified relationships | M6 |
 | /services/seo | SEO | Organic search service evaluation; Businesses seeking organic discovery | /services | Families/services + verified relationships | M6 |
-| /services/local-seo-google-business-profile | Local SEO / Google Business Profile | Local search and GBP support; Businesses with verified local needs | /services | Families/services + verified relationships | M6 |
-| /services/ai-search-aeo-geo | AI Search / AEO / GEO | AI search visibility support; Businesses evaluating AI search discovery | /services | Families/services + verified relationships | M6 |
-| /services/authority-digital-pr | Authority / Digital PR | Authority and digital PR services; Businesses evaluating authority-building work | /services | Families/services + verified relationships | M6 |
-| /services/paid-advertising-ppc | Paid Advertising / PPC | Paid advertising management; Businesses considering paid acquisition | /services | Families/services + verified relationships | M6 |
-| /services/platform-advertising | Platform-specific advertising | Channel-specific advertising support; Businesses evaluating an approved channel | /services | Families/services + verified relationships | M6 |
-| /services/social-media-management | Social Media Management | Social management services; Businesses seeking managed social activity | /services | Families/services + verified relationships | M6 |
+| /services/local-seo | Local SEO | Local search and GBP support; Businesses with verified local needs | /services | Families/services + verified relationships | M6 |
+| /services/ai-search-visibility | AI Search Visibility | AI search visibility support; Businesses evaluating AI search discovery | /services | Families/services + verified relationships | M6 |
+| /services/authority-pr | Authority & PR | Authority and digital PR services; Businesses evaluating authority-building work | /services | Families/services + verified relationships | M6 |
+| /services/paid-advertising | Paid Advertising | Paid advertising management; Businesses considering paid acquisition | /services | Families/services + verified relationships | M6 |
+| /services/specialist-campaigns | Specialist Campaigns | Channel-specific advertising support; Businesses evaluating an approved channel | /services | Families/services + verified relationships | M6 |
+| /services/social-media | Social Media | Social management services; Businesses seeking managed social activity | /services | Families/services + verified relationships | M6 |
 | /services/content-marketing | Content Marketing | Content marketing support; Businesses evaluating content programs | /services | Families/services + verified relationships | M6 |
-| /services/branding-graphic-design | Branding & Graphic Design | Brand and graphic design services; Businesses and project prospects | /services | Families/services + verified relationships | M6 |
-| /services/video-creative-production | Video / Creative Production | Video and creative production services; Businesses with creative/project needs | /services | Families/services + verified relationships | M6 |
-| /services/website-design-development | Website Design & Development | Website design/development evaluation; Businesses needing web projects | /services | Families/services + verified relationships | M6 |
-| /services/app-mvp-design-development | App / MVP Design & Development | App and MVP development evaluation; Businesses seeking product/project development | /services | Families/services + verified relationships | M6 |
-| /services/website-care-maintenance | Website Care / Maintenance | Website maintenance support; Businesses with existing websites | /services | Families/services + verified relationships | M6 |
-| /services/cro | CRO | Conversion optimization services; Businesses evaluating conversion improvement | /services | Families/services + verified relationships | M6 |
-| /services/email-sms-marketing | Email / SMS Marketing | Email/SMS marketing services; Businesses evaluating lifecycle marketing | /services | Families/services + verified relationships | M6 |
-| /services/crm-marketing-automation | CRM & Marketing Automation | CRM and marketing automation services; Businesses evaluating marketing operations | /services | Families/services + verified relationships | M6 |
-| /services/ai-automation | AI Automation | AI automation service evaluation; Businesses evaluating approved automation needs | /services | Families/services + verified relationships | M6 |
-| /services/b2b-marketing-lead-generation | B2B Marketing / Lead Generation | B2B marketing and lead support; B2B businesses | /services | Families/services + verified relationships | M6 |
-| /services/analytics-tracking-reporting | Analytics / Tracking / Reporting | Measurement and reporting services; Businesses evaluating measurement needs | /services | Families/services + verified relationships | M6 |
-| /services/business-integrations | Business Integrations | Business system integration support; Businesses evaluating integration projects | /services | Families/services + verified relationships | M6 |
-| /services/enterprise-marketing-growth-leadership | Enterprise Marketing / Growth Leadership | Enterprise growth leadership evaluation; Enterprise decision makers | /services | Families/services + verified relationships | M6 |
+| /services/branding-design | Branding & Design | Brand and graphic design services; Businesses and project prospects | /services | Families/services + verified relationships | M6 |
+| /services/photo-video | Photo & Video | Video and creative production services; Businesses with creative/project needs | /services | Families/services + verified relationships | M6 |
+| /services/website-development | Website Development | Website design/development evaluation; Businesses needing web projects | /services | Families/services + verified relationships | M6 |
+| /services/app-mvp-development | App / MVP Development | App and MVP development evaluation; Businesses seeking product/project development | /services | Families/services + verified relationships | M6 |
+| /services/website-care | Website Care | Website maintenance support; Businesses with existing websites | /services | Families/services + verified relationships | M6 |
+| /services/conversion-optimization | Conversion Optimization | Conversion optimization services; Businesses evaluating conversion improvement | /services | Families/services + verified relationships | M6 |
+| /services/email-sms | Email & SMS | Email/SMS marketing services; Businesses evaluating lifecycle marketing | /services | Families/services + verified relationships | M6 |
+| /services/crm-automation | CRM & Automation | CRM and marketing automation services; Businesses evaluating marketing operations | /services | Families/services + verified relationships | M6 |
+| /services/ai-automation | AI & Automation | AI automation service evaluation; Businesses evaluating approved automation needs | /services | Families/services + verified relationships | M6 |
+| /services/b2b-marketing | B2B Marketing | B2B marketing and lead support; B2B businesses | /services | Families/services + verified relationships | M6 |
+| /services/analytics-tracking | Analytics & Tracking | Measurement and reporting services; Businesses evaluating measurement needs | /services | Families/services + verified relationships | M6 |
+| /services/business-technology-integrations | Business Technology & Integrations | Business system integration support; Businesses evaluating integration projects | /services | Families/services + verified relationships | M6 |
+| /services/enterprise-leadership | Enterprise Leadership | Enterprise growth leadership evaluation; Enterprise decision makers | /services | Families/services + verified relationships | M6 |
 
-### Industry candidates — the same 11 as M4.1
+### Industry candidates — 10 launch-priority and 8 secondary (v3.0 doc 04 §3)
 
 Each has route type Industry detail, audience the named sector's business prospects, primary CTA Request a Consultation → /consultation, and Conditional/TBF publication status.
 
@@ -518,7 +517,7 @@ Each has route type Industry detail, audience the named sector's business prospe
 | /industries/healthcare | Healthcare sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
 | /industries/real-estate | Real Estate sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
 | /industries/home-services | Home Services sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
-| /industries/ecommerce | E-commerce sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
+| /industries/ecommerce | Ecommerce sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
 | /industries/saas-ai-technology | SaaS / AI / Technology sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
 | /industries/restaurants-franchises | Restaurants / Franchises sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
 | /industries/legal | Legal sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
@@ -526,19 +525,25 @@ Each has route type Industry detail, audience the named sector's business prospe
 | /industries/finance | Finance sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
 | /industries/automotive | Automotive sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
 | /industries/b2b-professional-services | B2B / Professional Services sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
+| /industries/travel-hospitality | Travel / Hospitality sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
+| /industries/beauty | Beauty sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
+| /industries/fitness | Fitness sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
+| /industries/fashion | Fashion sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
+| /industries/construction | Construction sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
+| /industries/logistics | Logistics sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
+| /industries/recruitment | Recruitment sector evaluation | /industries | Approved sector content + verified service/package references | M7 |
 
 ### Additional conditional patterns and destinations
 
 | Route | Type / parent | Audience / intent | Primary CTA | Planned data | Indexability / sitemap when published | Milestone / specific gate |
 | --- | --- | --- | --- | --- | --- | --- |
-| /services/[familySlug]/[serviceSlug] | Individual service / family | Specific approved service need | Request a Proposal → /request-proposal | Service record + valid family relationship | Index/follow; Yes | M6; distinct child content, no family-intent duplicate |
+| /services/[familySlug]/[serviceSlug] | Individual service / family | Specific approved service need | Request a Proposal → /proposal | Service record + valid family relationship | Index/follow; Yes | M6; distinct child content, no family-intent duplicate |
 | /projects | Project hub / / | One-time project prospects; distinct discovery | Send a Project Brief → /contact | Approved project modes and service references | Index/follow; Yes | M6; otherwise embedded discovery |
-| /add-ons | Add-on hub / / | Prospects evaluating compatible additions | Request a Proposal → /request-proposal | Approved add-ons + compatibility | Index/follow; Yes | M6; otherwise embedded additions |
+| /add-ons | Add-on hub / / | Prospects evaluating compatible additions | Request a Proposal → /proposal | Approved add-ons + compatibility | Index/follow; Yes | M6; otherwise embedded additions |
 | /case-studies | Proof hub / / | Prospects evaluating verified work | Request a Consultation → /consultation | Approved evidence records | Index/follow; Yes | M7; supplied proof and publication rights |
 | /case-studies/[slug] | Proof detail / /case-studies | Relevant prospects; specific verified engagement | Request a Consultation → /consultation | Verified engagement and factual relationships | Index/follow; Yes | M7; unique supplied evidence |
 | /insights | Resources hub / / | Researchers; educational discovery | Explore Services → /services | Approved content records | Index/follow; Yes | M7; useful approved inventory |
 | /insights/[slug] | Article/guide / /insights | Researchers; distinct informational question | Request a Consultation → /consultation | Approved article/guide content | Index/follow; Yes | M7; no invented editorial program |
-| /digital-audit | Offer/conversion / / | Eligible prospects; approved audit scope | Request an Audit, if approved | Approved offer + shared enquiry | Proposed noindex/follow utility; No; revisit only for distinct substantive offer intent | M8; scope, eligibility, cost/terms and receiving workflow TBF |
 | /terms | Legal / / | Visitors; approved website terms | Contact with a terms question → /contact | Approved legal content | Proposed index/follow; Yes | M9; legal need/content approval |
 | /cookies | Legal / / | Visitors; actual cookie/tracking practices | Review privacy information → /privacy | Approved factual disclosures | Proposed index/follow; Yes | M9; tracking/legal need/content approval |
 | /thank-you | Utility / / | Submitters; verified receipt acknowledgement | Return to homepage → / | Minimal receipt state; no personal-data URL | Noindex; No | M8; optional, inline confirmation valid |

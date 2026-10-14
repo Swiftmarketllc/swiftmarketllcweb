@@ -24,19 +24,19 @@ Exactly 20 fixed identities are retained. All are **draft**, not reviewed, with 
 | route:services | /services | route:home |
 | route:packages | /packages | route:home |
 | route:packages:startup | /packages/startup | route:packages |
-| route:package:startup:basic | /packages/startup/basic | route:packages:startup |
-| route:package:startup:standard | /packages/startup/standard | route:packages:startup |
-| route:package:startup:premium | /packages/startup/premium | route:packages:startup |
+| route:package:startup:basic | /packages/startup-basic | route:packages:startup |
+| route:package:startup:standard | /packages/startup-standard | route:packages:startup |
+| route:package:startup:premium | /packages/startup-premium | route:packages:startup |
 | route:packages:growing-business | /packages/growing-business | route:packages |
-| route:package:growing-business:basic | /packages/growing-business/basic | route:packages:growing-business |
-| route:package:growing-business:standard | /packages/growing-business/standard | route:packages:growing-business |
-| route:package:growing-business:premium | /packages/growing-business/premium | route:packages:growing-business |
+| route:package:growing-business:basic | /packages/growing-business-basic | route:packages:growing-business |
+| route:package:growing-business:standard | /packages/growing-business-standard | route:packages:growing-business |
+| route:package:growing-business:premium | /packages/growing-business-premium | route:packages:growing-business |
 | route:packages:compare | /packages/compare | route:packages |
 | route:enterprise | /enterprise | route:home |
 | route:industries | /industries | route:home |
 | route:partnerships | /partnerships | route:home |
 | route:consultation | /consultation | route:home |
-| route:request-proposal | /request-proposal | route:home |
+| route:proposal | /proposal | route:home |
 | route:contact | /contact | route:home |
 | route:privacy | /privacy | route:home |
 
@@ -82,13 +82,13 @@ Each item has a unique group-scoped `nav:` ID and a canonical route ID. `package
 | Export / journey | Intent | Destination |
 | --- | --- | --- |
 | consultationCTA | request-consultation | route:consultation |
-| proposalCTA | request-proposal | route:request-proposal |
+| proposalCTA | request-proposal | route:proposal |
 | enterpriseCTA | request-consultation; Enterprise context | route:consultation |
 | partnershipCTA | discuss-partnership | route:contact |
 | projectBriefCTA | send-project-brief | route:contact |
 | comparePackagesCTA | compare | route:packages:compare |
-| packageEnquiryCTAs (six) | request-proposal; canonical package selection | route:request-proposal |
-| getIndividualServiceEnquiryCTA | request-proposal; valid individual service selection | route:request-proposal |
+| packageEnquiryCTAs (six) | request-proposal; canonical package selection | route:proposal |
+| getIndividualServiceEnquiryCTA | request-proposal; valid individual service selection | route:proposal |
 
 The individual-service helper returns `undefined` for unknown IDs, including family IDs. No current individual-service candidate is generated because the canonical service inventory is empty. Package selection retains package ID, segment and tier independently; it does not create a price, inclusion or recommendation. Enterprise retains custom selection intent. Enquiry context stays structured data; this module does not serialize selections or personal data into URLs.
 

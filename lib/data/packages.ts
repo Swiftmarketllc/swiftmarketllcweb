@@ -1,6 +1,8 @@
 import type {
   AddOn,
   AddOnCompatibility,
+  CapabilityMatrix,
+  CapabilityRow,
   Decision,
   EnterpriseOffering,
   OfferScope,
@@ -52,12 +54,46 @@ const packageFields = {
 
 const tierNames = { basic: "Basic", standard: "Standard", premium: "Premium" } as const;
 
+/** Doc 06 row structure. Every value is TBF: no quantity, platform or scope is approved. */
+function row(id: string, label: string, note?: string): CapabilityRow {
+  return Object.freeze({
+    id: `capability:${id}`,
+    label,
+    value: Object.freeze({ state: "tbf", ...(note ? { note } : {}) } as const),
+    services: tbf,
+  });
+}
+function capabilitiesFor(segment: PackageSegment, tier: PackageTier): CapabilityMatrix {
+  const rows = segment === "startup"
+    ? [
+        row("strategy", "Strategy", "TBF scope"),
+        row("seo-local", "SEO / Local", "TBF quantities"),
+        row("social", "Social", "TBF platforms and posts"),
+        row("ads-management", "Ads management", tier === "basic" ? "TBF / optional" : undefined),
+        row("content-creative", "Content / creative"),
+        row("tracking-reporting", "Tracking / reporting"),
+        row("support", "Support"),
+      ]
+    : [
+        row("strategy-review", "Strategy / review"),
+        row("seo-local", "SEO / Local"),
+        row("paid-channels", "Paid channels"),
+        row("social-content", "Social / content"),
+        row("cro-web", "CRO / web"),
+        row("email-crm-automation", "Email / CRM / automation"),
+        row("analytics-reporting", "Analytics / reporting"),
+        row("support-cadence", "Support cadence"),
+      ];
+  return Object.freeze(rows);
+}
+
 function draftPackage<S extends PackageSegment, T extends PackageTier>(
   segment: S,
   tier: T,
 ): PackageFor<S, T> {
-  const slug = parseSlug(tier);
-  if (slug === null) throw new Error(`Invalid package inventory slug: ${tier}`);
+  // Doc 00 §5: /packages/[slug]. The segment prefix keeps tier slugs globally unique.
+  const slug = parseSlug(`${segment}-${tier}`);
+  if (slug === null) throw new Error(`Invalid package inventory slug: ${segment}-${tier}`);
   return Object.freeze({
     ...packageFields,
     kind: "package",
@@ -66,6 +102,8 @@ function draftPackage<S extends PackageSegment, T extends PackageTier>(
     tier,
     slug,
     name: tierNames[tier],
+    version: Object.freeze({ number: 1, status: "draft" } as const),
+    capabilities: capabilitiesFor(segment, tier),
   });
 }
 
@@ -122,9 +160,9 @@ export function getPackageById(id: string): Package | undefined {
   return packages.find((offer) => offer.id === id);
 }
 
-/** Tier slug alone is ambiguous; preserve the approved segment namespace. */
-export function getPackageBySlug(segment: string, slug: string): Package | undefined {
-  return packages.find((offer) => offer.segment === segment && offer.slug === slug);
+/** Slugs embed the segment (for example "startup-basic"), so one argument is unambiguous. */
+export function getPackageBySlug(slug: string): Package | undefined {
+  return packages.find((offer) => offer.slug === slug);
 }
 
 export function getPackagesBySegment(segment: string): readonly Package[] {

@@ -18,12 +18,12 @@ Exactly **six** packages are populated: **three Startup Business** and **three G
 
 | Segment | Name | Canonical ID | Slug | Architecture candidate path |
 | --- | --- | --- | --- | --- |
-| Startup Business | Basic | package:startup:basic | basic | /packages/startup/basic |
-| Startup Business | Standard | package:startup:standard | standard | /packages/startup/standard |
-| Startup Business | Premium | package:startup:premium | premium | /packages/startup/premium |
-| Growing Business | Basic | package:growing-business:basic | basic | /packages/growing-business/basic |
-| Growing Business | Standard | package:growing-business:standard | standard | /packages/growing-business/standard |
-| Growing Business | Premium | package:growing-business:premium | premium | /packages/growing-business/premium |
+| Startup Business | Basic | package:startup:basic | basic | /packages/startup-basic |
+| Startup Business | Standard | package:startup:standard | standard | /packages/startup-standard |
+| Startup Business | Premium | package:startup:premium | premium | /packages/startup-premium |
+| Growing Business | Basic | package:growing-business:basic | basic | /packages/growing-business-basic |
+| Growing Business | Standard | package:growing-business:standard | standard | /packages/growing-business-standard |
+| Growing Business | Premium | package:growing-business:premium | premium | /packages/growing-business-premium |
 
 IDs preserve M4.3's `package:segment:tier` convention. Slugs are the approved final URL segment and are unique **within their segment namespace**. The six IDs and six complete candidate paths are globally unique; repeating `basic` across two segments is intentional. Do not invent flattened slugs or silently rename M4.1/M4.2 paths. Optional package `routeId` remains omitted until a concrete route registry is implemented. The paths above are documentation, not implemented pages or public links.
 
@@ -51,7 +51,7 @@ Every package and Enterprise scope retains explicit TBF for deliverables, limits
 
 All six packages and Enterprise reuse the exact frozen `serviceExternalCosts` baseline from `lib/data/services.ts`, accounting for advertising/media spend, third-party tools, hosting, premium assets, production and other external costs. Every treatment is explicitly separate; no amount or provider is supplied. Reuse preserves one baseline source without duplicating commercial values. A future offer-specific inclusion must provide explicit approved scope and approval reference in that offer's typed external-cost record; it must not modify the baseline for every other offer.
 
-Service/management fees, advertising spend and external costs remain distinct in future comparisons, enquiries and proposals. Serving E-commerce clients does not introduce checkout or purchasing into this website.
+Service/management fees, advertising spend and external costs remain distinct in future comparisons, enquiries and proposals. Serving Ecommerce clients does not introduce checkout or purchasing into this website.
 
 ## Relationships and enquiry selection
 
@@ -66,7 +66,7 @@ Service/management fees, advertising spend and external costs remain distinct in
 
 A family association must not include every child service. An industry recommendation must not imply package inclusion. No service, industry or add-on mapping is populated. Future validation must check IDs against canonical sources, relationship uniqueness, published availability and approved compatibility.
 
-Selecting a package later carries its canonical ID with the matching segment/tier through the existing correlated `PackageSelection` contract to `/request-proposal`. Consultation remains available for undecided visitors. Enterprise retains custom consultation/proposal context; individual services and one-time projects need no recurring package. Add-ons update enquiry interest only. Selection never creates a purchase, contract, confirmed appointment or successful submission.
+Selecting a package later carries its canonical ID with the matching segment/tier through the existing correlated `PackageSelection` contract to `/proposal`. Consultation remains available for undecided visitors. Enterprise retains custom consultation/proposal context; individual services and one-time projects need no recurring package. Add-ons update enquiry interest only. Selection never creates a purchase, contract, confirmed appointment or successful submission.
 
 Public context contains reference IDs only; contact details, messages and budgets belong to future trusted server handling. The canonical catalog exposes exact segment/tier slots for constructing typed selections; no parallel selection list or private enquiry fixture is populated. All public eligibility and input validation remains part of the later route/lead implementation.
 

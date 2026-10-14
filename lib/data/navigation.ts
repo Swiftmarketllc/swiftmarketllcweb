@@ -10,9 +10,8 @@ import type { RouteFragmentValidator } from "@/lib/data/routes";
 
 /** Architecture CTA candidates only. No CTA becomes a working public link by declaration. */
 export const consultationCTA = Object.freeze({ kind: "enquiry-link", intent: "request-consultation", label: "Request a Consultation", destination: Object.freeze({ routeId: "route:consultation" }) } as const satisfies ConversionCTA);
-export const proposalCTA = Object.freeze({ kind: "enquiry-link", intent: "request-proposal", label: "Request a Proposal", destination: Object.freeze({ routeId: "route:request-proposal" }) } as const satisfies ConversionCTA);
+export const proposalCTA = Object.freeze({ kind: "enquiry-link", intent: "request-proposal", label: "Request a Proposal", destination: Object.freeze({ routeId: "route:proposal" }) } as const satisfies ConversionCTA);
 export const enterpriseCTA = Object.freeze({ ...consultationCTA, context: Object.freeze({ enterprise: true } as const) } satisfies ConversionCTA);
-export const partnershipCTA = Object.freeze({ kind: "enquiry-link", intent: "discuss-partnership", label: "Discuss a Partnership", destination: Object.freeze({ routeId: "route:contact" }) } as const satisfies ConversionCTA);
 export const projectBriefCTA = Object.freeze({ kind: "enquiry-link", intent: "send-project-brief", label: "Send a Project Brief", destination: Object.freeze({ routeId: "route:contact" }) } as const satisfies ConversionCTA);
 export const comparePackagesCTA = Object.freeze({ kind: "navigation", intent: "compare", label: "Compare Packages", destination: Object.freeze({ routeId: "route:packages:compare" }) } as const satisfies CTA);
 
@@ -44,8 +43,8 @@ function group(id: NavigationGroup["id"], label: string, targets: readonly Route
 /** Existing architecture labels only. Conditional resources are omitted until registered. */
 export const navigationGroups: readonly NavigationGroup[] = Object.freeze([
   group("nav-group:primary", "Primary navigation", ["route:services", "route:packages", "route:enterprise", "route:industries", "route:about", "route:consultation"]),
-  group("nav-group:utility", "Utility navigation", ["route:home", "route:contact", "route:partnerships"]),
-  group("nav-group:company", "Company", ["route:about", "route:contact", "route:partnerships"]),
+  group("nav-group:utility", "Utility navigation", ["route:home", "route:contact"]),
+  group("nav-group:company", "Company", ["route:about", "route:contact"]),
   group("nav-group:solutions", "Solutions", ["route:services", "route:packages", "route:enterprise", "route:industries"]),
   group("nav-group:legal", "Legal", ["route:privacy"]),
 ]);
